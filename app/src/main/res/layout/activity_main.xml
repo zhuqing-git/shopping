@@ -11,24 +11,19 @@
         android:id="@+id/max"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinator_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="15"
-            >
-
+            android:layout_weight="15">
 
 
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/appBarLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-
-
+                android:layout_height="wrap_content">
 
 
                 <androidx.appcompat.widget.Toolbar
@@ -57,7 +52,7 @@
 
 
                         <androidx.appcompat.widget.SearchView
-                            android:id="@+id/seachview"
+                            android:id="@+id/seachview_1"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
@@ -92,16 +87,11 @@
                         android:background="#FFF"
                         app:tabGravity="center"
                         app:tabIndicatorColor="@color/colorPrimary"
-                        app:tabMinWidth="125dp"
+
                         app:tabMode="scrollable"
                         app:tabSelectedTextColor="@color/colorPrimary" />
 
-                    <ImageButton
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="right"
-                        android:background="@drawable/d16"
-                        android:scaleType="centerCrop" />
+
 
 
                 </FrameLayout>
@@ -114,8 +104,7 @@
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                 />
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
             <!--                android:background="?android:attr/windowBackground"-->
 
@@ -123,14 +112,25 @@
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/viewpager_bottomnavigationview"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="15"
+                        android:visibility="gone"
+                        />
+
+
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigationView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="0dp"
+            android:layout_weight="1"
             app:labelVisibilityMode="labeled"
+            android:background="#fff"
             app:menu="@menu/bottom_nav" />
 
 
@@ -139,9 +139,10 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+
         app:headerLayout="@layout/nav_hander"
         app:menu="@menu/nav_menu" />
 

@@ -22,6 +22,7 @@
         android:src="@drawable/ic_launcher_background"
         android:id="@+id/login_title_imageView"/>
     <LinearLayout
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="#fff">

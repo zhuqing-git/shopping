@@ -7,15 +7,15 @@
         android:icon="@drawable/d1"/>
     <item
         android:id="@+id/item2"
-        android:title="首页"
+        android:title="分类"
         android:icon="@drawable/d1"/>
     <item
         android:id="@+id/item3"
-        android:title="首页"
+        android:title="消息"
         android:icon="@drawable/d1"/>
     <item
         android:id="@+id/item4"
-        android:title="首页"
+        android:title="社区"
         android:icon="@drawable/d1"/>
 
 

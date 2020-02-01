@@ -60,6 +60,8 @@ public class MyFragment1 extends Fragment {
         return builder.toString();
     }
     //endregion
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
