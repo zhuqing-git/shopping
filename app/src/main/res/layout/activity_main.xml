@@ -58,8 +58,25 @@
                             android:layout_margin="10dp"
                             android:layout_weight="8"
                             android:background="@drawable/yuan"
+
                             app:iconifiedByDefault="false"
                             app:queryHint="" />
+
+                        <TextView
+                            android:id="@+id/seachview_text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="10dp"
+                            android:visibility="gone"
+                            android:layout_weight="8"
+                            android:gravity="center"
+                            android:text="分类"
+                            android:textColor="#fff"
+                            android:textSize="20sp"
+                            app:iconifiedByDefault="false"
+                            app:queryHint="" />
+
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:layout_width="0dp"
@@ -92,8 +109,6 @@
                         app:tabSelectedTextColor="@color/colorPrimary" />
 
 
-
-
                 </FrameLayout>
 
 
@@ -109,17 +124,16 @@
             <!--                android:background="?android:attr/windowBackground"-->
 
 
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager_bottomnavigationview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:visibility="gone"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
-                    <androidx.viewpager.widget.ViewPager
-                        android:id="@+id/viewpager_bottomnavigationview"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="15"
-                        android:visibility="gone"
-                        />
-
 
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -129,8 +143,9 @@
             android:layout_marginStart="0dp"
             android:layout_marginEnd="0dp"
             android:layout_weight="1"
-            app:labelVisibilityMode="labeled"
+
             android:background="#fff"
+            app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_nav" />
 
 

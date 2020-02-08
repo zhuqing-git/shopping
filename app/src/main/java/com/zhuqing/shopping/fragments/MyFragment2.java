@@ -1,4 +1,4 @@
-package com.zhuqing.shopping;
+package com.zhuqing.shopping.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -21,6 +21,7 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.loader.ImageLoader;
+import com.zhuqing.shopping.R;
 import com.zhuqing.shopping.adapter.CommodityAdapter;
 import com.zhuqing.shopping.entity.Commodity;
 
@@ -38,8 +39,6 @@ public class MyFragment2 extends Fragment {
     private List<Commodity> fruitList = new ArrayList<>();
 
 
-
-
     //region 初始化recycleView
     private void initFruits() {
         for (int i = 0; i < 20; i++) {
@@ -49,26 +48,27 @@ public class MyFragment2 extends Fragment {
             fruitList.add(pear);
         }
     }
+
     private String getRandomLengthName(String apple) {
-        Random random=new Random();
-        int length=random.nextInt(20)+1;
-        StringBuilder builder=new StringBuilder();
-        for(int i =0;i<length;i++)
-        {
+        Random random = new Random();
+        int length = random.nextInt(20) + 1;
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < length; i++) {
             builder.append(apple);
         }
         return builder.toString();
     }
+
     //endregion
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.layout_page2,container,false);
+        View view = inflater.inflate(R.layout.layout_page2, container, false);
         initFruits();
-        RecyclerView recyclerView=view.findViewById(R.id.page2_recyclerView);
-        GridLayoutManager manager=new GridLayoutManager(getContext(),2);
+        RecyclerView recyclerView = view.findViewById(R.id.page2_recyclerView);
+        GridLayoutManager manager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(manager);
-        CommodityAdapter adapter=new CommodityAdapter(fruitList);
+        CommodityAdapter adapter = new CommodityAdapter(fruitList);
         recyclerView.setAdapter(adapter);
 
         imageUrlData = new ArrayList<>();
@@ -79,15 +79,7 @@ public class MyFragment2 extends Fragment {
         contentData.add("头像");
         contentData.add("头像");
         contentData.add("头像");
-//        myBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
-//        myBanner.setImageLoader(new Myloader());
-//        myBanner.setImages(imageUrlData);
-//        myBanner.setBannerTitles(contentData);
-//        myBanner.setBannerAnimation(Transformer.Default);
-//        myBanner.setDelayTime(2000);
-//        myBanner.isAutoPlay(true);
-//        myBanner.setIndicatorGravity(BannerConfig.CENTER);
-//        myBanner.start();
+
         return view;
     }
 

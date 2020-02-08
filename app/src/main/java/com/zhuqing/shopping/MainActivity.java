@@ -13,16 +13,21 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.zhuqing.shopping.fragments.MyFragment1;
+import com.zhuqing.shopping.fragments.MyFragment2;
+import com.zhuqing.shopping.fragments.MyFragment3;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +42,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     CircleImageView imagePersiion;
+    //    CircleImageView imagePersion_sort;
     SearchView searchView1;
-    SearchView searchView2;
+    TextView searchViewText;
     TabLayout tabLayout;
     ViewPager viewPager1;
     ViewPager viewPager2;
@@ -46,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     List<Fragment> fragments2;
     String[] title = {"首页", "书本", "手机", "电脑", "数码", "美妆", "运动", "洗护", "电器"};
     BottomNavigationView bottomNavigationView;
+    public static int width;
 
 
     @Override
@@ -55,22 +62,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         searchView1 = (SearchView) findViewById(R.id.seachview_1);
-        searchView2 = (SearchView) findViewById(R.id.seachview_2);
+        searchViewText = (TextView) findViewById(R.id.seachview_text);
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
         viewPager1 = (ViewPager) findViewById(R.id.viewpager);
         viewPager2 = (ViewPager) findViewById(R.id.viewpager_bottomnavigationview);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigationView);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         imagePersiion = (CircleImageView) findViewById(R.id.image_persion);
+//        imagePersion_sort = (CircleImageView) findViewById(R.id.sort_image_persion);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
 
 
         imagePersiion.setOnClickListener(this);
+//        imagePersion_sort.setOnClickListener(this);
 
 
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+//        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         searchView1.setFocusable(false);
+
+
+//        Display display=getWindowManager().getDefaultDisplay();
+//        Point size=new Point();
+//        display.getSize(size);
+//        width=size.x;
+//       height=size.y;
+
+
+        //得到屏幕宽度
+        int a = getApplicationContext().getApplicationContext().getResources()
+                .getDisplayMetrics().widthPixels;
+        width = a;
+        //Log.d("test", String.valueOf(a));
 
 
         navigationView.setCheckedItem(R.id.nav_call);
@@ -79,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 //drawerLayout.closeDrawers();
 
-                Toast.makeText(MainActivity.this,menuItem.getTitle().toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
@@ -123,11 +146,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.item1:
-                        coordinatorLayout.setVisibility(View.VISIBLE);
+                        viewPager1.setVisibility(View.VISIBLE);
+                        tabLayout.setVisibility(View.VISIBLE);
+                        searchView1.setVisibility(View.VISIBLE);
+
+                        searchViewText.setVisibility(View.GONE);
                         viewPager2.setVisibility(View.GONE);
                         break;
                     case R.id.item2:
-                        coordinatorLayout.setVisibility(View.GONE);
+                        viewPager1.setVisibility(View.GONE);
+                        tabLayout.setVisibility(View.GONE);
+                        searchView1.setVisibility(View.GONE);
+
+                        searchViewText.setVisibility(View.VISIBLE);
                         viewPager2.setVisibility(View.VISIBLE);
                         viewPager2.setCurrentItem(0);
                         // searchView2.setFocusable(false);
@@ -175,13 +206,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @param item
      * @return
      */
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-////        getMenuInflater().inflate(R.menu.toolbar, menu);
-////        getMenuInflater().inflate(R.menu.bottom_nav, menu);
-//
-//        return true;
-//    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
@@ -202,6 +227,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            case R.id.dongtai_layout:
 //                System.out.println("点击");
 //                break;
+//            case R.id.sort_image_persion:
+//                Toast.makeText(this,"hello",Toast.LENGTH_SHORT).show();
+//                break;
             default:
                 break;
         }
@@ -210,13 +238,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClickLinearLayout(View view) {
         switch (view.getId()) {
             case R.id.dongtai_layout:
-               Toast.makeText(this,"动态",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "动态", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.guanzhu_layout:
-                Toast.makeText(this,"关注",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "关注", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.fensi_layout:
-                Toast.makeText(this,"粉丝",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "粉丝", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.shuben_layout:
+                Toast.makeText(this, "书本", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, SortActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;
@@ -249,6 +282,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public CharSequence getPageTitle(int position) {
             return title[position];
+
         }
     }
     //endregion

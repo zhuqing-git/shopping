@@ -29,17 +29,38 @@
                 android:layout_height="wrap_content"
                 >
 
-                <TextView
+                <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
-                    android:layout_height="170dp"
+                    android:layout_height="200dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button_dege" />
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="4dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/button_dege"
+                       />
 
-                <TextView
+
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
-                    android:layout_height="170dp"
+                    android:layout_height="200dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button_dege" />
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="4dp"
+                   >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/button_dege"
+                       />
+
+                </androidx.cardview.widget.CardView>
+
+
+
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -47,8 +68,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-
             </androidx.recyclerview.widget.RecyclerView>
 
 

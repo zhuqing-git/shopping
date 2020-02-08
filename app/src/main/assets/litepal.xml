@@ -1,0 +1,14 @@
+<litepal>
+    <dbname value="shop"/>
+    <version value="1">
+        <list>
+
+            <mapping class="com.zhuqing.shopping.db.User"/>
+
+
+
+        </list>
+    </version>
+
+
+</litepal>

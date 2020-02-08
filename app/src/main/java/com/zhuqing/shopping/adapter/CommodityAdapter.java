@@ -16,33 +16,60 @@ import java.util.List;
 
 public class CommodityAdapter extends RecyclerView.Adapter<CommodityAdapter.ViewHolder> {
     private List<Commodity> mCommodityList;
+    private int type;
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView commodityImage;
         TextView commodityName;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            commodityName=itemView.findViewById(R.id.commodity_name);
-            commodityImage=itemView.findViewById(R.id.commodity_image);
+            commodityName = itemView.findViewById(R.id.commodity_name);
+            commodityImage = itemView.findViewById(R.id.commodity_image);
         }
     }
 
-    public CommodityAdapter(List<Commodity>commodityList)
-    {
-        mCommodityList=commodityList;
+    static class ViewHolder2 extends RecyclerView.ViewHolder {
+        ImageView commodityImage;
+        TextView commodityName;
+
+        public ViewHolder2(@NonNull View itemView) {
+            super(itemView);
+            commodityName = itemView.findViewById(R.id.commodity_name);
+            commodityImage = itemView.findViewById(R.id.commodity_image);
+        }
+    }
+
+    public CommodityAdapter(List<Commodity> commodityList) {
+        mCommodityList = commodityList;
     }
 
 
     @NonNull
     @Override
     public CommodityAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.commodity_item,parent,false);
-        ViewHolder viewHolder=new ViewHolder(view);
+        View view;
+
+
+        if (viewType == 0) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.commodity_item, parent, false);
+            ViewHolder2 linearViewHolder = new ViewHolder2(view);
+
+        } else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.commodity_item_2, parent, false);
+            ViewHolder gridViewHolder = new ViewHolder(view);
+
+        }
+
+        ViewHolder viewHolder = new ViewHolder(view);
+
+
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull CommodityAdapter.ViewHolder holder, int position) {
-        Commodity commodity=mCommodityList.get(position);
+        Commodity commodity = mCommodityList.get(position);
         holder.commodityImage.setImageResource(commodity.getImageid());
         holder.commodityName.setText(commodity.getTitle());
 
@@ -52,4 +79,16 @@ public class CommodityAdapter extends RecyclerView.Adapter<CommodityAdapter.View
     public int getItemCount() {
         return mCommodityList.size();
     }
+
+
+    //region 分列
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return type;
+    }
+    //endregion
 }
