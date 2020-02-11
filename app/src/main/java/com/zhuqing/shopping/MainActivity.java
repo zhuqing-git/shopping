@@ -25,9 +25,14 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.zhuqing.shopping.db.User;
 import com.zhuqing.shopping.fragments.MyFragment1;
 import com.zhuqing.shopping.fragments.MyFragment2;
 import com.zhuqing.shopping.fragments.MyFragment3;
+import com.zhuqing.shopping.nav_activity.Fans;
+
+import org.litepal.LitePal;
+import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     ImageButton imageButton;
+    Toolbar toolbar;
     CoordinatorLayout coordinatorLayout;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -46,20 +52,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SearchView searchView1;
     TextView searchViewText;
     TabLayout tabLayout;
-    ViewPager viewPager1;
-    ViewPager viewPager2;
-    List<Fragment> fragments1;
-    List<Fragment> fragments2;
+    ViewPager viewPager1,viewPager2;
+    List<Fragment> fragments1,fragments2;
+
     String[] title = {"首页", "书本", "手机", "电脑", "数码", "美妆", "运动", "洗护", "电器"};
     BottomNavigationView bottomNavigationView;
     public static int width;
 
 
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        menu.set
+//        return super.onCreateOptionsMenu(menu);
+//    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         searchView1 = (SearchView) findViewById(R.id.seachview_1);
         searchViewText = (TextView) findViewById(R.id.seachview_text);
@@ -96,13 +107,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Log.d("test", String.valueOf(a));
 
 
-        navigationView.setCheckedItem(R.id.nav_call);
+       // navigationView.setBackground(Color.parseColor("#fff"));
+        navigationView.setCheckedItem(R.id.nav_main);
+
+        //navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                //drawerLayout.closeDrawers();
 
-                Toast.makeText(MainActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
+
+               switch (menuItem.getItemId())
+               {
+
+                   case R.id.nav_logout:
+                       Intent intent =new Intent(MainActivity.this,LoginActivity.class);
+                       startActivity(intent);
+                       LoginActivity.editor.putBoolean("verification",false).apply();
+                       finish();
+                       break;
+                   default:
+                       drawerLayout.closeDrawers();
+                       Toast.makeText(MainActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                       break;
+               }
+
                 return true;
             }
         });
@@ -238,13 +266,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClickLinearLayout(View view) {
         switch (view.getId()) {
             case R.id.dongtai_layout:
+                User user=new User();
+
                 Toast.makeText(this, "动态", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.guanzhu_layout:
-                Toast.makeText(this, "关注", Toast.LENGTH_SHORT).show();
+                Intent intent2=new Intent(this, Fans.class);
+                intent2.putExtra("state",false);
+                startActivity(intent2);
                 break;
             case R.id.fensi_layout:
-                Toast.makeText(this, "粉丝", Toast.LENGTH_SHORT).show();
+                Intent intent3=new Intent(this, Fans.class);
+                intent3.putExtra("state",true);
+                startActivity(intent3);
+
                 break;
             case R.id.shuben_layout:
                 Toast.makeText(this, "书本", Toast.LENGTH_SHORT).show();

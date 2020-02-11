@@ -21,6 +21,8 @@
         android:scaleType="centerCrop"
         android:src="@drawable/ic_launcher_background"
         android:id="@+id/login_title_imageView"/>
+
+
     <LinearLayout
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
@@ -37,6 +39,7 @@
 
             android:id="@+id/login_account_imageView"/>
         <EditText
+            android:id="@+id/register_phone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:lines="1"
@@ -56,6 +59,45 @@
         android:layout_marginLeft="50dp"
         android:layout_marginRight="10dp"
         android:background="#000"/>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#fff">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:scaleType="fitStart"
+            android:src="@mipmap/accuont" />
+
+
+        <EditText
+            android:id="@+id/register_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:lines="1"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:cursorVisible="false"
+            android:hint="密码"
+            android:textColor="#000"
+            android:textColorHint="#C0C0C0"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="10dp"
+        android:background="#000"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -95,7 +137,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="1dp"
             android:layout_gravity="center_vertical"
-            android:id="@+id/regist_send"
+            android:id="@+id/regist_get"
 
 
             />
@@ -125,7 +167,7 @@
             android:text="注册"
 
             android:background="@color/colorPrimary"
-            android:id="@+id/login_regist_button"/>
+            android:id="@+id/regist_send"/>
 
 
 

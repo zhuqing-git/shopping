@@ -101,6 +101,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_centerVertical="true"
+
                         android:background="#FFF"
                         app:tabGravity="center"
                         app:tabIndicatorColor="@color/colorPrimary"
@@ -157,6 +158,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        app:itemBackground="@color/colorWhite"
 
         app:headerLayout="@layout/nav_hander"
         app:menu="@menu/nav_menu" />

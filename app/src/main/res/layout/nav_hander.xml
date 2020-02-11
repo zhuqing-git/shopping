@@ -49,15 +49,19 @@
 
     </RelativeLayout>
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_height="60dp"
+        android:background="#fff"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp">
 
         <LinearLayout
             android:id="@+id/dongtai_layout"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="onClickLinearLayout"
             android:orientation="vertical"
@@ -65,65 +69,87 @@
             >
 
             <TextView
+android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="12" />
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="12"
+                android:textSize="16sp"
+                />
 
             <TextView
+                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="动态" />
+                android:layout_height="20dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:gravity="bottom|center"
+                android:text="动态"
+                android:textSize="16sp"
+               />
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="70dp"
             android:layout_weight="1"
             android:orientation="vertical"
             android:onClick="onClickLinearLayout"
             android:id="@+id/guanzhu_layout">
 
             <TextView
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="16sp"
                 android:text="12" />
 
             <TextView
+                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_height="20dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:gravity="bottom|center"
+                android:textSize="16sp"
                 android:text="关注" />
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="70dp"
             android:layout_weight="1"
             android:orientation="vertical"
             android:onClick="onClickLinearLayout"
             android:id="@+id/fensi_layout">
 
             <TextView
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="16sp"
 
                 android:text="12" />
 
             <TextView
+                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
+                android:layout_height="20dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:gravity="bottom|center"
+                android:textSize="16sp"
                 android:text="粉丝" />
         </LinearLayout>
 
 
+
     </LinearLayout>
+
 
 
 </LinearLayout>
