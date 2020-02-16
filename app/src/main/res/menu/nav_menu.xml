@@ -17,16 +17,16 @@
     <group android:checkableBehavior="single" android:id="@+id/group2">
 
         <item
-            android:id="@+id/nav_friend"
+            android:id="@+id/nav_public"
 
             android:icon="@drawable/ic_launcher_background"
             android:title="我发布的"/>
         <item
-            android:id="@+id/nav_location"
+            android:id="@+id/nav_sell"
             android:icon="@drawable/ic_launcher_background"
             android:title="我卖出的"/>
         <item
-            android:id="@+id/nav_tasksdf"
+            android:id="@+id/nav_buy"
             android:icon="@drawable/ic_launcher_background"
             android:title="我买到的"/>
 

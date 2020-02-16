@@ -61,21 +61,22 @@
 
                             app:iconifiedByDefault="false"
                             app:queryHint="" />
-
                         <TextView
-                            android:id="@+id/seachview_text"
+                            android:id="@+id/main_title"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_margin="10dp"
-                            android:visibility="gone"
+                           android:visibility="gone"
                             android:layout_weight="8"
-                            android:gravity="center"
                             android:text="分类"
-                            android:textColor="#fff"
+                            android:textColor="@color/colorWhite"
                             android:textSize="20sp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+
                             app:iconifiedByDefault="false"
                             app:queryHint="" />
+
+
 
 
                         <de.hdodenhof.circleimageview.CircleImageView
@@ -160,7 +161,7 @@
         android:layout_gravity="start"
         app:itemBackground="@color/colorWhite"
 
-        app:headerLayout="@layout/nav_hander"
+
         app:menu="@menu/nav_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

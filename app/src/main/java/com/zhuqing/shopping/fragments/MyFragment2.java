@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,12 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.bumptech.glide.Glide;
-import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-import com.youth.banner.Transformer;
 import com.youth.banner.loader.ImageLoader;
 import com.zhuqing.shopping.R;
 import com.zhuqing.shopping.adapter.CommodityAdapter;
@@ -31,8 +26,16 @@ import java.util.Random;
 
 public class MyFragment2 extends Fragment {
 
+
+
     List<Integer> imageUrlData;
     List<String> contentData;
+    int status;
+
+    public MyFragment2(int status){
+        this.status=status;
+    }
+
 
 
     private String[] data = {"apple", "pear"};
@@ -63,11 +66,19 @@ public class MyFragment2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_page2, container, false);
+        View view = inflater.inflate(R.layout.fragment_page2, container, false);
         initFruits();
         RecyclerView recyclerView = view.findViewById(R.id.page2_recyclerView);
-        GridLayoutManager manager = new GridLayoutManager(getContext(), 2);
-        recyclerView.setLayoutManager(manager);
+        if(status==0)
+        {
+            GridLayoutManager manager = new GridLayoutManager(getContext(), 2);
+            recyclerView.setLayoutManager(manager);
+        }else if(status==1)
+        {
+            LinearLayoutManager manager=new LinearLayoutManager(getContext());
+            recyclerView.setLayoutManager(manager);
+        }
+
         CommodityAdapter adapter = new CommodityAdapter(fruitList);
         recyclerView.setAdapter(adapter);
 

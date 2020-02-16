@@ -2,9 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/head_relative_layout"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:background="?attr/colorPrimary"
@@ -12,10 +14,24 @@
         android:padding="10dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_centerInParent="true"
-            android:src="@drawable/d16" />
+           android:id="@+id/image_person"
+
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+
+
+            app:civ_border_overlay="true"
+            app:civ_border_width="2dp"
+           app:civ_border_color="@color/colorWhite"
+            android:clickable="true"
+
+
+
+
+
+
+            android:layout_above="@+id/username"
+            android:src="@drawable/d222" />
 
         <TextView
             android:id="@+id/username"
@@ -24,6 +40,8 @@
             android:layout_above="@id/gold_edit"
             android:text="朱庆"
             android:textColor="#FFF"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:textSize="14sp" />
 
 
@@ -124,7 +142,7 @@ android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:orientation="vertical"
             android:onClick="onClickLinearLayout"
-            android:id="@+id/fensi_layout">
+            android:id="@+id/fans_layout">
 
             <TextView
                 android:layout_marginTop="10dp"

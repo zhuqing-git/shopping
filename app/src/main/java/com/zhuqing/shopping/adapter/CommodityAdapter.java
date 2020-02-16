@@ -1,5 +1,6 @@
 package com.zhuqing.shopping.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.zhuqing.shopping.MsgActivity;
 import com.zhuqing.shopping.R;
 import com.zhuqing.shopping.entity.Commodity;
 
@@ -19,26 +21,30 @@ public class CommodityAdapter extends RecyclerView.Adapter<CommodityAdapter.View
     private int type;
 
     static class ViewHolder extends RecyclerView.ViewHolder {
+        View commodityView;
         ImageView commodityImage;
         TextView commodityName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            commodityView=itemView;
             commodityName = itemView.findViewById(R.id.commodity_name);
             commodityImage = itemView.findViewById(R.id.commodity_image);
         }
     }
 
-    static class ViewHolder2 extends RecyclerView.ViewHolder {
-        ImageView commodityImage;
-        TextView commodityName;
-
-        public ViewHolder2(@NonNull View itemView) {
-            super(itemView);
-            commodityName = itemView.findViewById(R.id.commodity_name);
-            commodityImage = itemView.findViewById(R.id.commodity_image);
-        }
-    }
+//    static class ViewHolder2 extends RecyclerView.ViewHolder {
+//        View commodityView;
+//        ImageView commodityImage;
+//        TextView commodityName;
+//
+//        public ViewHolder2(@NonNull View itemView) {
+//            super(itemView);
+//            commodityView=itemView;
+//            commodityName = itemView.findViewById(R.id.commodity_name);
+//            commodityImage = itemView.findViewById(R.id.commodity_image);
+//        }
+//    }
 
     public CommodityAdapter(List<Commodity> commodityList) {
         mCommodityList = commodityList;
@@ -48,12 +54,12 @@ public class CommodityAdapter extends RecyclerView.Adapter<CommodityAdapter.View
     @NonNull
     @Override
     public CommodityAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view;
+        final View view;
 
 
         if (viewType == 0) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.commodity_item, parent, false);
-            ViewHolder2 linearViewHolder = new ViewHolder2(view);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_commodity, parent, false);
+            ViewHolder linearViewHolder = new ViewHolder(view);
 
         } else {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.commodity_item_2, parent, false);
@@ -61,7 +67,18 @@ public class CommodityAdapter extends RecyclerView.Adapter<CommodityAdapter.View
 
         }
 
-        ViewHolder viewHolder = new ViewHolder(view);
+       final ViewHolder viewHolder = new ViewHolder(view);
+        viewHolder.commodityView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position=viewHolder.getAdapterPosition();
+                Commodity commodity=mCommodityList.get(position);
+                Intent intent=new Intent(v.getContext(),MsgActivity.class);
+                v.getContext().startActivity(intent);
+              //  Toast.makeText(v.getContext(),commodity.getTitle(),Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
         return viewHolder;

@@ -13,7 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".nav_activity.Fans"></activity>
+        <activity android:name=".MsgActivity"></activity>
+        <activity
+            android:name=".nav_activity.ExchangeActivity"
+            android:label="" />
+        <activity
+            android:name=".nav_activity.CollectionActivity"
+            android:label="" />
+        <activity
+            android:name=".nav_activity.DynamicActivity"
+            android:label="" />
+        <activity
+            android:name=".nav_activity.Fans"
+            android:label="我的好友" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".SortActivity" />
         <activity android:name=".LoginActivity">

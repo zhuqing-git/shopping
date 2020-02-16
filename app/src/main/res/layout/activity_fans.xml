@@ -15,68 +15,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
    >
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/fans_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:contentInsetStart="0dp"
-
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-
-            <LinearLayout
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/fans_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:contentInsetStart="0dp"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/fans_tablayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/colorWhite"
+
+                app:tabGravity="center"
 
 
-                <TextView
-                    android:id="@+id/fans_textView"
-                    android:layout_width="wrap_content"
-
-                    android:layout_height="wrap_content"
-
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="5dp"
-                    android:gravity="left"
-
-                    android:text="我的好友"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="18sp"
+                app:tabIndicatorColor="@color/colorPrimary"
+                app:tabIndicatorFullWidth="false"
+                app:tabMinWidth="200dp"
 
 
-                    />
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/colorPrimary" />
 
 
-            </LinearLayout>
-        </androidx.appcompat.widget.Toolbar>
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/fans_tablayout"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/colorWhite"
-            app:layout_scrollFlags="scroll|enterAlways|snap"
-            app:tabGravity="center"
 
 
-            app:tabIndicatorColor="@color/colorPrimary"
-            app:tabIndicatorFullWidth="false"
-            app:tabMinWidth="200dp"
-
-
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/colorPrimary" />
 
 
 

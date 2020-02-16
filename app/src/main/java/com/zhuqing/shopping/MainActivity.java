@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -26,9 +27,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.zhuqing.shopping.db.User;
+import com.zhuqing.shopping.fragments.InformationFragment;
 import com.zhuqing.shopping.fragments.MyFragment1;
 import com.zhuqing.shopping.fragments.MyFragment2;
 import com.zhuqing.shopping.fragments.MyFragment3;
+import com.zhuqing.shopping.nav_activity.CollectionActivity;
+import com.zhuqing.shopping.nav_activity.DynamicActivity;
+import com.zhuqing.shopping.nav_activity.ExchangeActivity;
 import com.zhuqing.shopping.nav_activity.Fans;
 
 import org.litepal.LitePal;
@@ -42,12 +47,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
+    Context context=this;
     ImageButton imageButton;
     Toolbar toolbar;
     CoordinatorLayout coordinatorLayout;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     CircleImageView imagePersiion;
+    CircleImageView navImagePerson;
     //    CircleImageView imagePersion_sort;
     SearchView searchView1;
     TextView searchViewText;
@@ -73,19 +80,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         searchView1 = (SearchView) findViewById(R.id.seachview_1);
-        searchViewText = (TextView) findViewById(R.id.seachview_text);
+        searchViewText=(TextView)findViewById(R.id.main_title);
+
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
         viewPager1 = (ViewPager) findViewById(R.id.viewpager);
         viewPager2 = (ViewPager) findViewById(R.id.viewpager_bottomnavigationview);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigationView);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         imagePersiion = (CircleImageView) findViewById(R.id.image_persion);
-//        imagePersion_sort = (CircleImageView) findViewById(R.id.sort_image_persion);
+        View headerLayout = navigationView.inflateHeaderView(R.layout.nav_hander);
+        navImagePerson=headerLayout.findViewById(R.id.image_person);
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
 
 
         imagePersiion.setOnClickListener(this);
+        navImagePerson.setOnClickListener(this);
 //        imagePersion_sort.setOnClickListener(this);
 
 
@@ -125,9 +136,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                        LoginActivity.editor.putBoolean("verification",false).apply();
                        finish();
                        break;
+                   case R.id.nav_collect:
+                       Intent intent1=new Intent(MainActivity.this, CollectionActivity.class);
+                       startActivity(intent1);
+                       break;
+                   case R.id.nav_public:
+                       Intent intent4=new Intent(MainActivity.this, ExchangeActivity.class);
+                       intent4.putExtra("state","我发布的");
+                       startActivity(intent4);
+                       break;
+
+                   case R.id.nav_sell:
+                       Intent intent2=new Intent(MainActivity.this, ExchangeActivity.class);
+                       intent2.putExtra("state","我卖出的");
+                       startActivity(intent2);
+                       break;
+                   case R.id.nav_buy:
+                       Intent intent3=new Intent(MainActivity.this, ExchangeActivity.class);
+                       intent3.putExtra("state","我买到的");
+                       startActivity(intent3);
+                       break;
+
+
                    default:
                        drawerLayout.closeDrawers();
-                       Toast.makeText(MainActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
+
                        break;
                }
 
@@ -139,19 +172,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //region 添加碎片
         fragments1 = new ArrayList<>();
         fragments1.add(new MyFragment1());
-        fragments1.add(new MyFragment2());
-        fragments1.add(new MyFragment2());
-        fragments1.add(new MyFragment2());
-        fragments1.add(new MyFragment2());
-        fragments1.add(new MyFragment2());
-        fragments1.add(new MyFragment2());
-        fragments1.add(new MyFragment2());
-        fragments1.add(new MyFragment2());
+        fragments1.add(new MyFragment2(0));
+        fragments1.add(new MyFragment2(0));
+        fragments1.add(new MyFragment2(0));
+        fragments1.add(new MyFragment2(0));
+        fragments1.add(new MyFragment2(0));
+        fragments1.add(new MyFragment2(0));
+        fragments1.add(new MyFragment2(0));
+        fragments1.add(new MyFragment2(0));
 
         fragments2 = new ArrayList<>();
         fragments2.add(new MyFragment3());
-        fragments2.add(new MyFragment3());
-        fragments2.add(new MyFragment3());
+        fragments2.add(new MyFragment2(1));
+        fragments2.add(new InformationFragment());
         //endregion
 
         adapter madapter1 = new adapter(getSupportFragmentManager(), fragments1);
@@ -169,6 +202,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
 
+        //region bottomNavigatinView 点击事件
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -192,21 +226,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         // searchView2.setFocusable(false);
                         break;
                     case R.id.item3:
-                        coordinatorLayout.setVisibility(View.GONE);
+                        viewPager1.setVisibility(View.GONE);
+                        tabLayout.setVisibility(View.GONE);
+                        searchView1.setVisibility(View.GONE);
+
+                        searchViewText.setVisibility(View.VISIBLE);
                         viewPager2.setVisibility(View.VISIBLE);
                         viewPager2.setCurrentItem(1);
                         break;
                     case R.id.item4:
-                        coordinatorLayout.setVisibility(View.GONE);
+                        viewPager1.setVisibility(View.GONE);
+                        tabLayout.setVisibility(View.GONE);
+                        searchView1.setVisibility(View.GONE);
+
+                        searchViewText.setVisibility(View.VISIBLE);
                         viewPager2.setVisibility(View.VISIBLE);
                         viewPager2.setCurrentItem(2);
-                        break;
+
                     default:
                         break;
                 }
                 return true;
             }
         });
+        //endregion
 
         viewPager2.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -248,34 +291,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.image_persion:
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
-//            case R.id.sort_up:
-//                Intent intent = new Intent(MainActivity.this, SortsActivity.class);
-//                startActivity(intent);
-//                break;
-//            case R.id.dongtai_layout:
-//                System.out.println("点击");
-//                break;
-//            case R.id.sort_image_persion:
-//                Toast.makeText(this,"hello",Toast.LENGTH_SHORT).show();
-//                break;
+            case R.id.image_person:
+                Intent intent=new Intent(this,DynamicActivity.class);
+                startActivity(intent);
+                break;
+
             default:
                 break;
         }
     }
 
+
     public void onClickLinearLayout(View view) {
         switch (view.getId()) {
+           // case R.id.nav_image_person:
             case R.id.dongtai_layout:
-                User user=new User();
-
-                Toast.makeText(this, "动态", Toast.LENGTH_SHORT).show();
+               Intent intent1=new Intent(this, DynamicActivity.class);
+               startActivity(intent1);
                 break;
             case R.id.guanzhu_layout:
                 Intent intent2=new Intent(this, Fans.class);
                 intent2.putExtra("state",false);
                 startActivity(intent2);
                 break;
-            case R.id.fensi_layout:
+            case R.id.fans_layout:
                 Intent intent3=new Intent(this, Fans.class);
                 intent3.putExtra("state",true);
                 startActivity(intent3);
