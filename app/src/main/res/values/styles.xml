@@ -8,6 +8,17 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorWhite</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+    <style name="UserpageUserNameExpandeleStyle">
+
+        <item name="android:text">朱庆</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:color">#fff</item>
+        <item name="android:maxLines">1</item>
+
+
+
     </style>
 
 </resources>

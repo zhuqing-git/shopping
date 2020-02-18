@@ -66,7 +66,7 @@ public class MyFragment1 extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.page1_recyclerView);
         GridLayoutManager manager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(manager);
-        CommodityAdapter adapter = new CommodityAdapter(fruitList);
+        CommodityAdapter adapter = new CommodityAdapter(fruitList,0);
         recyclerView.setAdapter(adapter);
 
         myBanner = (Banner) view.findViewById(R.id.banner);

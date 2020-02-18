@@ -18,18 +18,29 @@ import java.util.List;
 
 public class CommodityAdapter extends RecyclerView.Adapter<CommodityAdapter.ViewHolder> {
     private List<Commodity> mCommodityList;
-    private int type;
+  private int number=0;
+    ViewHolder viewHolder;
+//    private int type;
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+     class ViewHolder extends RecyclerView.ViewHolder {
         View commodityView;
         ImageView commodityImage;
         TextView commodityName;
 
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             commodityView=itemView;
-            commodityName = itemView.findViewById(R.id.commodity_name);
-            commodityImage = itemView.findViewById(R.id.commodity_image);
+            if(number==0)
+            {
+                commodityName = itemView.findViewById(R.id.commodity_name);
+                commodityImage = itemView.findViewById(R.id.commodity_image);
+            }else if(number==1)
+            {
+                commodityName = itemView.findViewById(R.id.item_topic_right_textview);
+                commodityImage = itemView.findViewById(R.id.item_topic_right_imageview);
+            }
+
         }
     }
 
@@ -46,28 +57,33 @@ public class CommodityAdapter extends RecyclerView.Adapter<CommodityAdapter.View
 //        }
 //    }
 
-    public CommodityAdapter(List<Commodity> commodityList) {
-        mCommodityList = commodityList;
+    public CommodityAdapter(List<Commodity> commodityList,int a){
+        mCommodityList=commodityList;
+        this.number=a;
     }
+
 
 
     @NonNull
     @Override
     public CommodityAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         final View view;
+        ViewHolder gridViewHolder;
 
+        if(number==0)
+        {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_commodity_linear, parent, false);
+            viewHolder = new ViewHolder(view);
 
-        if (viewType == 0) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_commodity, parent, false);
-            ViewHolder linearViewHolder = new ViewHolder(view);
-
-        } else {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.commodity_item_2, parent, false);
-            ViewHolder gridViewHolder = new ViewHolder(view);
+        }else if (number==1)
+        {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_topic_right, parent, false);
+          viewHolder = new ViewHolder(view);
 
         }
 
-       final ViewHolder viewHolder = new ViewHolder(view);
+
+
         viewHolder.commodityView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,13 +115,13 @@ public class CommodityAdapter extends RecyclerView.Adapter<CommodityAdapter.View
 
 
     //region 分列
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return type;
-    }
+//    public void setType(int type) {
+//        this.type = type;
+//    }
+//
+//    @Override
+//    public int getItemViewType(int position) {
+//        return type;
+//    }
     //endregion
 }

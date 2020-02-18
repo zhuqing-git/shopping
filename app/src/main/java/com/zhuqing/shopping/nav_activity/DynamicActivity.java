@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -44,14 +45,15 @@ public class DynamicActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dynamic);
         dynamicToolbar=(Toolbar) findViewById(R.id.dynamic_toolbar);
+       // dynamicToolbar.setTitle("朱庆");
         setSupportActionBar(dynamicToolbar);
         dynamicAppbar=(AppBarLayout)findViewById(R.id.dynamic_appBarLayout);
-        dynamicHead=(TextView)findViewById(R.id.dynamic_username_head);
+       // dynamicHead=(TextView)findViewById(R.id.dynamic_username_head);
         tabLayout=(TabLayout)findViewById(R.id.dynamic_tablayout);
         fansViewPager=(ViewPager)findViewById(R.id.dynamic_viewpager);
         dynamicImagePerson=(FloatingActionButton)findViewById(R.id.dynamic_image_person);
-        dynamicUsername=findViewById(R.id.dynamic_username);
-        dynamicLinearLayout=findViewById(R.id.dynamic_linearlayout);
+       // dynamicUsername=findViewById(R.id.dynamic_username);
+      //  dynamicLinearLayout=findViewById(R.id.dynamic_linearlayout);
 
 
         dynamicAppbar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
@@ -60,27 +62,30 @@ public class DynamicActivity extends AppCompatActivity implements View.OnClickLi
             public void onStateChanged(AppBarLayout appBarLayout, State state) {
 
                 if( state == State.EXPANDED ) {
-                    dynamicHead.setVisibility(View.GONE);
+                   // dynamicHead.setVisibility(View.GONE);
                     dynamicImagePerson.setVisibility(View.VISIBLE);
-                    dynamicUsername.setVisibility(View.VISIBLE);
-                    dynamicLinearLayout.setVisibility(View.VISIBLE);
+                   // dynamicUsername.setVisibility(View.VISIBLE);
+                   // dynamicLinearLayout.setVisibility(View.VISIBLE);
 
                     //展开状态
 
                 }else if(state == State.COLLAPSED){
-                    dynamicHead.setVisibility(View.VISIBLE);
+                   // dynamicHead.setVisibility(View.VISIBLE);
                     dynamicImagePerson.setVisibility(View.GONE);
-                    dynamicUsername.setVisibility(View.GONE);
-                    dynamicLinearLayout.setVisibility(View.GONE);
+                  //  dynamicUsername.setVisibility(View.GONE);
+                   // dynamicLinearLayout.setVisibility(View.GONE);
+
+
 
 
                     //折叠状态
 
                 }else {
-                    dynamicHead.setVisibility(View.GONE);
+                    //dynamicHead.setVisibility(View.GONE);
                     dynamicImagePerson.setVisibility(View.VISIBLE);
-                    dynamicUsername.setVisibility(View.GONE);
-                    dynamicLinearLayout.setVisibility(View.GONE);
+                   // dynamicUsername.setVisibility(View.VISIBLE);
+                    //dynamicLinearLayout.setVisibility(View.VISIBLE);
+//
 
 
 

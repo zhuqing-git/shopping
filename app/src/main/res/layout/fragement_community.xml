@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#e0e0e0"
     android:layout_height="match_parent">
+
+<com.google.android.material.tabs.TabLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    app:tabGravity="center"
+    app:tabIndicatorColor="@color/colorPrimary"
+    app:tabIndicatorFullWidth="false"
+    app:tabMinWidth="200dp"
+    app:tabMode="fixed"
+    app:tabSelectedTextColor="@color/colorPrimary"
+    android:id="@+id/community_tablayout"
+    android:background="@color/colorWhite"/>
+
+
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+       >
+
+
+
+
+
+
+                <androidx.viewpager.widget.ViewPager
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/community_viewpager"
+                    />
+
+
+
+
+
+
+
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 
 </LinearLayout>

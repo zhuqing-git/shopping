@@ -7,26 +7,35 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.ViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.zhuqing.shopping.db.User;
+import com.zhuqing.shopping.fragments.CommunityFragment;
 import com.zhuqing.shopping.fragments.InformationFragment;
 import com.zhuqing.shopping.fragments.MyFragment1;
 import com.zhuqing.shopping.fragments.MyFragment2;
@@ -35,6 +44,8 @@ import com.zhuqing.shopping.nav_activity.CollectionActivity;
 import com.zhuqing.shopping.nav_activity.DynamicActivity;
 import com.zhuqing.shopping.nav_activity.ExchangeActivity;
 import com.zhuqing.shopping.nav_activity.Fans;
+import com.zhuqing.shopping.util.CustomFragmentPagerAdapter;
+import com.zhuqing.shopping.util.CustomViewPager;
 
 import org.litepal.LitePal;
 import org.litepal.crud.DataSupport;
@@ -43,29 +54,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.Interceptor;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    Context context=this;
+    Context context = this;
     ImageButton imageButton;
     Toolbar toolbar;
     CoordinatorLayout coordinatorLayout;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    CircleImageView imagePersiion;
+    CircleImageView imagePersiion,rightCirclaImageView;
     CircleImageView navImagePerson;
     //    CircleImageView imagePersion_sort;
     SearchView searchView1;
     TextView searchViewText;
     TabLayout tabLayout;
-    ViewPager viewPager1,viewPager2;
-    List<Fragment> fragments1,fragments2;
+    ViewPager viewPager1;
+    CustomViewPager viewPager2;
+    List<Fragment> fragments1, fragments2;
+    AppBarLayout appBar;
+    AppBarLayout.LayoutParams params;
+    View headerLayout;
 
-    String[] title = {"首页", "书本", "手机", "电脑", "数码", "美妆", "运动", "洗护", "电器"};
+
     BottomNavigationView bottomNavigationView;
     public static int width;
 
+    String[] title = {"首页", "书本", "手机", "电脑", "数码", "美妆", "运动", "洗护", "电器"};
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
@@ -80,19 +97,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         searchView1 = (SearchView) findViewById(R.id.seachview_1);
-        searchViewText=(TextView)findViewById(R.id.main_title);
+        searchViewText = (TextView) findViewById(R.id.main_title);
 
-        tabLayout = (TabLayout) findViewById(R.id.tablayout);
+        tabLayout = (TabLayout) findViewById(R.id.main_tablayout);
         viewPager1 = (ViewPager) findViewById(R.id.viewpager);
-        viewPager2 = (ViewPager) findViewById(R.id.viewpager_bottomnavigationview);
+        viewPager2 = (CustomViewPager) findViewById(R.id.viewpager_bottomnavigationview);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigationView);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         imagePersiion = (CircleImageView) findViewById(R.id.image_persion);
-        View headerLayout = navigationView.inflateHeaderView(R.layout.nav_hander);
-        navImagePerson=headerLayout.findViewById(R.id.image_person);
+        rightCirclaImageView=(CircleImageView)findViewById(R.id.main_right_circleimageview);
+         headerLayout = navigationView.inflateHeaderView(R.layout.nav_hander);
+        navImagePerson = headerLayout.findViewById(R.id.image_person);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
+        appBar=(AppBarLayout)findViewById(R.id.appBarLayout);
+         params=(AppBarLayout.LayoutParams)toolbar.getLayoutParams();
+
+          //取消上划时顶部阴影
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//
+//            appBar.setOutlineProvider(null);
+//
+//        }
 
 
         imagePersiion.setOnClickListener(this);
@@ -118,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Log.d("test", String.valueOf(a));
 
 
-       // navigationView.setBackground(Color.parseColor("#fff"));
+        // navigationView.setBackground(Color.parseColor("#fff"));
         navigationView.setCheckedItem(R.id.nav_main);
 
         //navigationView.setItemIconTintList(null);
@@ -127,42 +154,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
 
-               switch (menuItem.getItemId())
-               {
+                switch (menuItem.getItemId()) {
 
-                   case R.id.nav_logout:
-                       Intent intent =new Intent(MainActivity.this,LoginActivity.class);
-                       startActivity(intent);
-                       LoginActivity.editor.putBoolean("verification",false).apply();
-                       finish();
-                       break;
-                   case R.id.nav_collect:
-                       Intent intent1=new Intent(MainActivity.this, CollectionActivity.class);
-                       startActivity(intent1);
-                       break;
-                   case R.id.nav_public:
-                       Intent intent4=new Intent(MainActivity.this, ExchangeActivity.class);
-                       intent4.putExtra("state","我发布的");
-                       startActivity(intent4);
-                       break;
+                    case R.id.nav_logout:
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        LoginActivity.editor.putBoolean("verification", false).apply();
+                        finish();
+                        break;
+                    case R.id.nav_collect:
+                        Intent intent1 = new Intent(MainActivity.this, CollectionActivity.class);
+                        startActivity(intent1);
+                        break;
+                    case R.id.nav_public:
+                        Intent intent4 = new Intent(MainActivity.this, ExchangeActivity.class);
+                        intent4.putExtra("state", "我发布的");
+                        startActivity(intent4);
+                        break;
 
-                   case R.id.nav_sell:
-                       Intent intent2=new Intent(MainActivity.this, ExchangeActivity.class);
-                       intent2.putExtra("state","我卖出的");
-                       startActivity(intent2);
-                       break;
-                   case R.id.nav_buy:
-                       Intent intent3=new Intent(MainActivity.this, ExchangeActivity.class);
-                       intent3.putExtra("state","我买到的");
-                       startActivity(intent3);
-                       break;
+                    case R.id.nav_sell:
+                        Intent intent2 = new Intent(MainActivity.this, ExchangeActivity.class);
+                        intent2.putExtra("state", "我卖出的");
+                        startActivity(intent2);
+                        break;
+                    case R.id.nav_buy:
+                        Intent intent3 = new Intent(MainActivity.this, ExchangeActivity.class);
+                        intent3.putExtra("state", "我买到的");
+                        startActivity(intent3);
+                        break;
 
 
-                   default:
-                       drawerLayout.closeDrawers();
+                    default:
+                        drawerLayout.closeDrawers();
 
-                       break;
-               }
+                        break;
+                }
 
                 return true;
             }
@@ -183,52 +209,63 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         fragments2 = new ArrayList<>();
         fragments2.add(new MyFragment3());
-        fragments2.add(new MyFragment2(1));
-        fragments2.add(new InformationFragment());
+        fragments2.add(new MyFragment2(2));
+        fragments2.add(new CommunityFragment());
         //endregion
 
-        adapter madapter1 = new adapter(getSupportFragmentManager(), fragments1);
+        CustomFragmentPagerAdapter madapter1 = new CustomFragmentPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, fragments1, title);
         viewPager1.setAdapter(madapter1);
         tabLayout.setupWithViewPager(viewPager1);
 
-        adapter madapter2 = new adapter(getSupportFragmentManager(), fragments2);
+        CustomFragmentPagerAdapter madapter2 = new CustomFragmentPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, fragments2, title);
         viewPager2.setAdapter(madapter2);
-        //viewpager的滑动配置
-        viewPager2.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
-            }
-        });
+        viewPager2.setScanScroll(false);
+
 
 
         //region bottomNavigatinView 点击事件
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.item1:
+                        searchViewText.setVisibility(View.GONE);
+                        viewPager2.setVisibility(View.GONE);
+
+
                         viewPager1.setVisibility(View.VISIBLE);
                         tabLayout.setVisibility(View.VISIBLE);
                         searchView1.setVisibility(View.VISIBLE);
 
-                        searchViewText.setVisibility(View.GONE);
-                        viewPager2.setVisibility(View.GONE);
+
+                        params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS|AppBarLayout.LayoutParams.SCROLL_FLAG_SNAP|
+                                AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL);
+                        toolbar.setLayoutParams(params);
+
+
+
+
                         break;
                     case R.id.item2:
-                        viewPager1.setVisibility(View.GONE);
+                        viewPager1.setVisibility(View.VISIBLE);
                         tabLayout.setVisibility(View.GONE);
                         searchView1.setVisibility(View.GONE);
+
 
                         searchViewText.setVisibility(View.VISIBLE);
                         viewPager2.setVisibility(View.VISIBLE);
                         viewPager2.setCurrentItem(0);
                         // searchView2.setFocusable(false);
+                     //   scroll|enterAlways|snap
+
+
                         break;
                     case R.id.item3:
                         viewPager1.setVisibility(View.GONE);
                         tabLayout.setVisibility(View.GONE);
                         searchView1.setVisibility(View.GONE);
+
 
                         searchViewText.setVisibility(View.VISIBLE);
                         viewPager2.setVisibility(View.VISIBLE);
@@ -238,10 +275,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         viewPager1.setVisibility(View.GONE);
                         tabLayout.setVisibility(View.GONE);
                         searchView1.setVisibility(View.GONE);
+                        rightCirclaImageView.setVisibility(View.GONE);
 
                         searchViewText.setVisibility(View.VISIBLE);
+                        searchViewText.setText("社区");
+
+
+
+
                         viewPager2.setVisibility(View.VISIBLE);
                         viewPager2.setCurrentItem(2);
+
+                        //禁止appbar滑动隐藏
+                        params.setScrollFlags(0);
+
+
+
+
+
+
+
 
                     default:
                         break;
@@ -251,9 +304,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         //endregion
 
+
+
+
+
         viewPager2.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
 
             }
 
@@ -270,6 +328,68 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
+
+
+
+    //region 设置appbar不划动隐藏（没用）
+//    boolean forbidAppBarScroll=false;
+//    private void forbidAppBarScroll(boolean forbid) {
+//        if (forbid == forbidAppBarScroll) {
+//            return;
+//        }
+//        if (forbid) {
+//            forbidAppBarScroll = true;
+//            if (ViewCompat.isLaidOut(appBar)) {
+//                setAppBarDragCallback(new AppBarLayout.Behavior.DragCallback() {
+//
+//                    @Override public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
+//                        return false;
+//                    }
+//                });
+//            } else {
+//                appBar.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//                    @Override public void onGlobalLayout() {
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+//                            appBar.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+//                        } else {
+//                            appBar.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+//                        }
+//                        setAppBarDragCallback(new AppBarLayout.Behavior.DragCallback() {
+//
+//                            @Override public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
+//                                return false;
+//                            }
+//                        });
+//                    }
+//                });
+//            }
+//        } else {
+//            forbidAppBarScroll = false;
+//            if (ViewCompat.isLaidOut(appBar)) {
+//                setAppBarDragCallback(null);
+//            } else {
+//                appBar.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//                    @Override public void onGlobalLayout() {
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+//                            appBar.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+//                        } else {
+//                            appBar.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+//                        }
+//                        setAppBarDragCallback(null);
+//                    }
+//                });
+//            }
+//        }
+//    }
+//
+//    public void setAppBarDragCallback(AppBarLayout.Behavior.DragCallback dragCallback) {
+//        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appBar.getLayoutParams();
+//        AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
+//        behavior.setDragCallback(dragCallback);
+//    }
+    //endregion
+
 
     /**
      * 适配菜单项
@@ -292,7 +412,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
             case R.id.image_person:
-                Intent intent=new Intent(this,DynamicActivity.class);
+                Intent intent = new Intent(this, DynamicActivity.class);
                 startActivity(intent);
                 break;
 
@@ -304,19 +424,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void onClickLinearLayout(View view) {
         switch (view.getId()) {
-           // case R.id.nav_image_person:
+            // case R.id.nav_image_person:
             case R.id.dongtai_layout:
-               Intent intent1=new Intent(this, DynamicActivity.class);
-               startActivity(intent1);
+                Intent intent1 = new Intent(this, DynamicActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.guanzhu_layout:
-                Intent intent2=new Intent(this, Fans.class);
-                intent2.putExtra("state",false);
+                Intent intent2 = new Intent(this, Fans.class);
+                intent2.putExtra("state", false);
                 startActivity(intent2);
                 break;
             case R.id.fans_layout:
-                Intent intent3=new Intent(this, Fans.class);
-                intent3.putExtra("state",true);
+                Intent intent3 = new Intent(this, Fans.class);
+                intent3.putExtra("state", true);
                 startActivity(intent3);
 
                 break;
@@ -327,36 +447,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             default:
                 break;
-        }
-    }
-    //endregion
-
-
-    //region viewpage适配器
-    private class adapter extends FragmentPagerAdapter {
-        private List<Fragment> list;
-
-        public adapter(FragmentManager fm, List<Fragment> list) {
-            super(fm);
-            this.list = list;
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return list.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return list.size();
-
-        }
-
-        @Nullable
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return title[position];
-
         }
     }
     //endregion

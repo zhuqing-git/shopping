@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:src="@drawable/d222"
+                android:layout_gravity="left|center"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="15"
+                android:layout_height="20dp"
+                android:text="我关注的话题"
+                android:layout_gravity="center|left"
+                android:gravity="center|left"
+                />
+
+
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:background="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/community_page1_recycleview1"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:src="@drawable/d222"
+                android:layout_gravity="left|center"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="15"
+                android:layout_height="20dp"
+                android:text="帖子"
+                android:layout_gravity="center|left"
+                android:gravity="center|left"
+                />
+
+
+
+
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:background="@color/colorWhite"
+            android:text="nisfajklsjfklsajflksajfklsjdfakldfjdafaskljdfkasjf"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:background="@color/colorWhite"
+            android:text="阿飞噶啥的噶士大夫觉得哈哈哈哈哈哈哈哈反反复复烦烦烦烦烦烦烦烦烦烦烦烦烦烦烦帆帆帆帆"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+ android:id="@+id/community_page1_recycleview2"/>
+
+
+
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

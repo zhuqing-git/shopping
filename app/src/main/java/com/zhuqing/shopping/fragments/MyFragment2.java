@@ -19,6 +19,7 @@ import com.youth.banner.loader.ImageLoader;
 import com.zhuqing.shopping.R;
 import com.zhuqing.shopping.adapter.CommodityAdapter;
 import com.zhuqing.shopping.entity.Commodity;
+import com.zhuqing.shopping.util.CustomLinearLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,8 +79,13 @@ public class MyFragment2 extends Fragment {
             LinearLayoutManager manager=new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(manager);
         }
+        else if(status==2)
+        {
+            CustomLinearLayoutManager manager=new CustomLinearLayoutManager(getContext());
+            recyclerView.setLayoutManager(manager);
+        }
 
-        CommodityAdapter adapter = new CommodityAdapter(fruitList);
+        CommodityAdapter adapter = new CommodityAdapter(fruitList,0);
         recyclerView.setAdapter(adapter);
 
         imageUrlData = new ArrayList<>();

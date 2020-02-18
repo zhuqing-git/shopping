@@ -23,14 +23,15 @@
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/appBarLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+               >
 
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/colorPrimary"
+
                     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                     app:contentInsetStart="0dp"
                     app:layout_scrollFlags="scroll|enterAlways|snap"
@@ -68,6 +69,8 @@
                            android:visibility="gone"
                             android:layout_weight="8"
                             android:text="分类"
+                            android:layout_margin="10dp"
+
                             android:textColor="@color/colorWhite"
                             android:textSize="20sp"
                             android:layout_gravity="center"
@@ -80,6 +83,7 @@
 
 
                         <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/main_right_circleimageview"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -98,12 +102,12 @@
 
 
                     <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/tablayout"
+                        android:id="@+id/main_tablayout"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_centerVertical="true"
 
-                        android:background="#FFF"
+                        android:background="@color/colorWhite"
                         app:tabGravity="center"
                         app:tabIndicatorColor="@color/colorPrimary"
 
@@ -117,6 +121,7 @@
             </com.google.android.material.appbar.AppBarLayout>
 
 
+
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewpager"
                 android:layout_width="match_parent"
@@ -126,7 +131,7 @@
             <!--                android:background="?android:attr/windowBackground"-->
 
 
-            <androidx.viewpager.widget.ViewPager
+            <com.zhuqing.shopping.util.CustomViewPager
                 android:id="@+id/viewpager_bottomnavigationview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -9,6 +9,7 @@ public class Commodity {
         this.imageid = imageid;
     }
 
+
     public String getTitle() {
         return title;
     }

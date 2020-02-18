@@ -74,7 +74,7 @@ public class CollectionActivity extends AppCompatActivity implements View.OnClic
         recyclerView = findViewById(R.id.sort_recyclerView);
         drawerLayout = (DrawerLayout) findViewById(R.id.sort_drawer_layout);
         sortWay = (CircleImageView) findViewById(R.id.sort_way);
-        adapter = new CommodityAdapter(fruitList);
+        adapter = new CommodityAdapter(fruitList,1);
 
         toolbar = (Toolbar) findViewById(R.id.sort_toolbar);
         setSupportActionBar(toolbar);
@@ -109,7 +109,7 @@ public class CollectionActivity extends AppCompatActivity implements View.OnClic
             case R.id.sort_way:
                 Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
                 if (goodsType == 0) {
-                    adapter.setType(1);
+                    //adapter.setType(1);
                     //2：设置对应的布局管理器
                     recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -118,7 +118,7 @@ public class CollectionActivity extends AppCompatActivity implements View.OnClic
                     goodsType = 1;
                 } else {
 
-                    adapter.setType(0);
+                   // adapter.setType(0);
                     recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
                     adapter.notifyDataSetChanged();
                     goodsType = 0;
