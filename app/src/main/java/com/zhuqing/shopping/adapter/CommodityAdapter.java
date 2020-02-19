@@ -44,19 +44,6 @@ public class CommodityAdapter extends RecyclerView.Adapter<CommodityAdapter.View
         }
     }
 
-//    static class ViewHolder2 extends RecyclerView.ViewHolder {
-//        View commodityView;
-//        ImageView commodityImage;
-//        TextView commodityName;
-//
-//        public ViewHolder2(@NonNull View itemView) {
-//            super(itemView);
-//            commodityView=itemView;
-//            commodityName = itemView.findViewById(R.id.commodity_name);
-//            commodityImage = itemView.findViewById(R.id.commodity_image);
-//        }
-//    }
-
     public CommodityAdapter(List<Commodity> commodityList,int a){
         mCommodityList=commodityList;
         this.number=a;
@@ -89,8 +76,8 @@ public class CommodityAdapter extends RecyclerView.Adapter<CommodityAdapter.View
             public void onClick(View v) {
                 int position=viewHolder.getAdapterPosition();
                 Commodity commodity=mCommodityList.get(position);
-                Intent intent=new Intent(v.getContext(),MsgActivity.class);
-                v.getContext().startActivity(intent);
+               // Intent intent=new Intent(v.getContext(),MsgActivity.class);
+               // v.getContext().startActivity(intent);
               //  Toast.makeText(v.getContext(),commodity.getTitle(),Toast.LENGTH_SHORT).show();
 
             }
@@ -114,14 +101,5 @@ public class CommodityAdapter extends RecyclerView.Adapter<CommodityAdapter.View
     }
 
 
-    //region 分列
-//    public void setType(int type) {
-//        this.type = type;
-//    }
-//
-//    @Override
-//    public int getItemViewType(int position) {
-//        return type;
-//    }
-    //endregion
+
 }

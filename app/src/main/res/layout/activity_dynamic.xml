@@ -9,6 +9,8 @@
     android:layout_height="match_parent">
 
 
+
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/dynamic_appBarLayout"
         android:fitsSystemWindows="true"
@@ -52,26 +54,9 @@ app:expandedTitleMarginBottom="10dp"
 app:title="朱庆"
 
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="50dp"
                 app:layout_collapseMode="pin">
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:orientation="horizontal">-->
 
-<!--                    <TextView-->
-<!--                        android:layout_marginRight="50dp"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:gravity="center"-->
-<!--                        android:id="@+id/dynamic_username_head"-->
-
-
-<!--                        android:text="朱庆"-->
-<!--                        android:textSize="24sp"-->
-<!--                        android:textColor="@color/colorWhite"/>-->
-
-<!--                </LinearLayout>-->
 
 
             </androidx.appcompat.widget.Toolbar>
@@ -135,31 +120,36 @@ app:title="朱庆"
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
-
-
-
-
-
-    <com.google.android.material.tabs.TabLayout
-
-        android:id="@+id/dynamic_tablayout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:orientation="horizontal"
         app:layout_anchor="@id/dynamic_viewpager"
-        app:layout_anchorGravity="top"
         android:layout_gravity="top"
-        android:layout_marginLeft="40dp"
-
-        android:background="@color/colorWhite"
-        app:tabGravity="center"
-        app:tabIndicatorColor="@color/colorPrimary"
-        app:tabIndicatorFullWidth="false"
-        app:tabMinWidth="200dp"
-        app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/colorPrimary" />
+        app:layout_anchorGravity="top"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"/>
 
 
+        <com.google.android.material.tabs.TabLayout
+
+            android:id="@+id/dynamic_tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+
+
+
+            android:background="@color/colorWhite"
+
+            app:tabGravity="center"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabIndicatorFullWidth="false"
+            app:tabMinWidth="200dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/colorPrimary" />
+    </LinearLayout>
 
 
 

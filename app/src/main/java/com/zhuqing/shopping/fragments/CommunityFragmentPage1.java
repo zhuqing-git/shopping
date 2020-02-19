@@ -13,14 +13,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.zhuqing.shopping.R;
 import com.zhuqing.shopping.adapter.CommodityAdapter;
+import com.zhuqing.shopping.adapter.TieziAdapter;
 import com.zhuqing.shopping.adapter.TopicAdapter;
 import com.zhuqing.shopping.entity.Commodity;
+import com.zhuqing.shopping.entity.Tiezi;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CommunityFragmentPage1 extends Fragment {
     private List<Commodity> topicList=new ArrayList<>();
+    private List<Tiezi> tieziList=new ArrayList<>();
+
+
+    private void initTiezi() {
+        for (int i = 0; i < 20; i++) {
+            Tiezi apple = new Tiezi("用户名",R.drawable.d16,"标题","这里是内容","综合",12,
+                    20,R.drawable.aaaa,R.drawable.aaaa,R.drawable.aaaa);
+            tieziList.add(apple);
+        }
+    }
+
+
 
     private void initTopic() {
         for (int i = 0; i < 20; i++) {
@@ -50,10 +64,13 @@ public class CommunityFragmentPage1 extends Fragment {
         recyclerView2.setLayoutManager(layoutManager2);
 
         initTopic();
+        initTiezi();
 
         TopicAdapter adapter=new TopicAdapter(topicList);
         recyclerView1.setAdapter(adapter);
-        recyclerView2.setAdapter(adapter);
+
+        TieziAdapter tieziAdapter=new TieziAdapter(tieziList);
+        recyclerView2.setAdapter(tieziAdapter);
 
 
 

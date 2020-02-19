@@ -103,8 +103,8 @@ public class DynamicActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         fansFragments=new ArrayList<>();
-        fansFragments.add(new FansFragment());
-        fansFragments.add(new FansFragment());
+        fansFragments.add(new FansFragment(0));
+        fansFragments.add(new FansFragment(1));
 
        DynamicActivity.adapter madapter1 = new DynamicActivity.adapter(getSupportFragmentManager(), fansFragments);
         fansViewPager.setAdapter(madapter1);

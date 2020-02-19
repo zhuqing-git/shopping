@@ -1,42 +1,29 @@
 package com.zhuqing.shopping;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
-import com.zhuqing.shopping.db.User;
 import com.zhuqing.shopping.fragments.CommunityFragment;
-import com.zhuqing.shopping.fragments.InformationFragment;
 import com.zhuqing.shopping.fragments.MyFragment1;
 import com.zhuqing.shopping.fragments.MyFragment2;
 import com.zhuqing.shopping.fragments.MyFragment3;
@@ -46,15 +33,10 @@ import com.zhuqing.shopping.nav_activity.ExchangeActivity;
 import com.zhuqing.shopping.nav_activity.Fans;
 import com.zhuqing.shopping.util.CustomFragmentPagerAdapter;
 import com.zhuqing.shopping.util.CustomViewPager;
-
-import org.litepal.LitePal;
-import org.litepal.crud.DataSupport;
-
+import com.zhuqing.shopping.util.WindowUtil;
 import java.util.ArrayList;
 import java.util.List;
-
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.Interceptor;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -131,18 +113,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         searchView1.setFocusable(false);
 
 
-//        Display display=getWindowManager().getDefaultDisplay();
-//        Point size=new Point();
-//        display.getSize(size);
-//        width=size.x;
-//       height=size.y;
 
 
-        //得到屏幕宽度
-        int a = getApplicationContext().getApplicationContext().getResources()
-                .getDisplayMetrics().widthPixels;
-        width = a;
-        //Log.d("test", String.valueOf(a));
+        WindowUtil.setStatusBar(this);
+
+
+
+
+
 
 
         // navigationView.setBackground(Color.parseColor("#fff"));
@@ -275,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         viewPager1.setVisibility(View.GONE);
                         tabLayout.setVisibility(View.GONE);
                         searchView1.setVisibility(View.GONE);
-                        rightCirclaImageView.setVisibility(View.GONE);
+                      //  rightCirclaImageView.setVisibility(View.GONE);
 
                         searchViewText.setVisibility(View.VISIBLE);
                         searchViewText.setText("社区");
@@ -286,8 +264,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         viewPager2.setVisibility(View.VISIBLE);
                         viewPager2.setCurrentItem(2);
 
+
+
                         //禁止appbar滑动隐藏
                         params.setScrollFlags(0);
+
 
 
 

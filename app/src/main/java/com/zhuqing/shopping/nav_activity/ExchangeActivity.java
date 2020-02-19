@@ -81,8 +81,8 @@ public class ExchangeActivity extends AppCompatActivity implements View.OnClickL
         }
 
         fansFragments=new ArrayList<>();
-        fansFragments.add(new FansFragment());
-        fansFragments.add(new FansFragment());
+        fansFragments.add(new FansFragment(0));
+        fansFragments.add(new FansFragment(0));
 
         adapter   madapter1 = new adapter(getSupportFragmentManager(), fansFragments);
         fansViewPager.setAdapter(madapter1);

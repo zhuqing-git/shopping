@@ -91,7 +91,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorWhite"
+
  android:id="@+id/community_page1_recycleview2"/>
 
 

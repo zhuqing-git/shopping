@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+
+    app:cardCornerRadius="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorWhite">
+
+       <LinearLayout
+           android:layout_width="0dp"
+           android:layout_weight="2"
+           android:layout_height="match_parent"
+           >
+           <de.hdodenhof.circleimageview.CircleImageView
+               android:layout_width="50dp"
+               android:layout_height="50dp"
+               android:id="@+id/item_tiezi_headImage"
+               android:scaleType="centerCrop"
+             android:layout_gravity="top|start"
+               android:layout_marginTop="10dp"
+
+               android:src="@drawable/d16"/>
+
+
+
+       </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="14"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text="朱庆"
+                android:id="@+id/item_tiezi_name"
+                />
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="这里是标题"
+                android:textSize="20sp"
+                android:textStyle="bold"
+android:id="@+id/item_tiezi_title"
+                android:textColor="#000"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:textColor="#000"
+                android:textSize="16sp"
+                android:text=" 在Android上实现英文字体加粗还是比较容易的，我们只需要布置一个TextView控件，然后在上面写写style就可以，但是我们如何实现中文字体加粗呢?"
+                android:layout_marginTop="10dp"
+                android:id="@+id/item_tiezi_content"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="200dp"
+                    android:id="@+id/item_tiezi_image1"
+                    android:src="@drawable/aaaa"
+                    android:scaleType="centerCrop"
+                    />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="200dp"
+                    android:visibility="invisible"
+                    android:id="@+id/item_tiezi_image2"
+                    android:scaleType="centerCrop"
+                    />
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="200dp"
+                    android:visibility="gone"
+                    android:id="@+id/item_tiezi_image3"
+                    android:scaleType="centerCrop"
+                    />
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_gravity="start|top"
+                    android:textColor="#000"
+                    android:id="@+id/item_tiezi_topic"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="10"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="start|top"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:id="@+id/item_tiezi_parise"
+                    android:textColor="#000"
+                    android:layout_gravity="start|top"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:id="@+id/item_tiezi_commont"
+                    android:textColor="#000"
+                    android:layout_gravity="start|top"/>
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>

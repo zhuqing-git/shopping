@@ -28,6 +28,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class FansFragment extends Fragment {
 
 
+ private int flag;
+
+ public FansFragment(int flag){
+     this.flag=flag;
+ }
+
 
 
     private List<FansName> fansName = new ArrayList<>();
@@ -37,8 +43,8 @@ public class FansFragment extends Fragment {
     private void initFruits() {
         for (int i = 0; i < 20; i++) {
 
-            fansName.add(new FansName("张三",R.drawable.d1));
-            fansName.add(new FansName("李四",R.drawable.d1));
+            fansName.add(new FansName("张三",R.drawable.d1,"没有未来的未来不是我想要的未来"));
+            fansName.add(new FansName("李四",R.drawable.d1,""));
 
         }
     }
@@ -54,7 +60,7 @@ public class FansFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.page2_recyclerView);
        LinearLayoutManager manager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(manager);
-FansNameAdapter adapter=new FansNameAdapter(fansName,getContext());
+FansNameAdapter adapter=new FansNameAdapter(fansName,getContext(),flag);
         recyclerView.setAdapter(adapter);
 
 

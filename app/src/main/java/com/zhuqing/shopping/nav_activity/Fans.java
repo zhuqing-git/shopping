@@ -21,6 +21,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +37,7 @@ import com.zhuqing.shopping.fragments.MyFragment1;
 import com.zhuqing.shopping.fragments.MyFragment2;
 import com.zhuqing.shopping.fragments.MyFragment3;
 import com.zhuqing.shopping.nav_activity.Fans;
+import com.zhuqing.shopping.util.WindowUtil;
 
 import org.litepal.LitePal;
 import org.litepal.crud.DataSupport;
@@ -72,8 +75,8 @@ public class Fans extends AppCompatActivity implements View.OnClickListener{
         }
 
         fansFragments=new ArrayList<>();
-        fansFragments.add(new FansFragment());
-        fansFragments.add(new FansFragment());
+        fansFragments.add(new FansFragment(0));
+        fansFragments.add(new FansFragment(1));
 
      adapter   madapter1 = new adapter(getSupportFragmentManager(), fansFragments);
         fansViewPager.setAdapter(madapter1);
@@ -85,6 +88,7 @@ public class Fans extends AppCompatActivity implements View.OnClickListener{
             tabLayout.getTabAt(1).select();
 
 
+        WindowUtil.setStatusBar(this);
 
     }
 
