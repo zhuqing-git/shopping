@@ -23,6 +23,7 @@ import com.youth.banner.loader.ImageLoader;
 import com.zhuqing.shopping.R;
 import com.zhuqing.shopping.adapter.CommodityAdapter;
 import com.zhuqing.shopping.entity.Commodity;
+import com.zhuqing.shopping.util.WindowUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,14 +45,17 @@ public class CollectionActivity extends AppCompatActivity implements View.OnClic
 
     private String[] data = {"apple", "pear"};
     private List<Commodity> fruitList = new ArrayList<>();
+    private List<Integer> imageList=new  ArrayList<>();
 
     //region 初始化recycleView
     private void initFruits() {
+        imageList.add(R.drawable.a1);
+
         for (int i = 0; i < 20; i++) {
-            Commodity apple = new Commodity(getRandomLengthName("Apple"), R.drawable.a1);
+            Commodity apple = new Commodity(1, "这里是内容", 20, 120,
+                    124, 3,  imageList,null);
             fruitList.add(apple);
-            Commodity pear = new Commodity(getRandomLengthName("Pear"), R.drawable.pear);
-            fruitList.add(pear);
+
         }
     }
 
@@ -86,6 +90,8 @@ public class CollectionActivity extends AppCompatActivity implements View.OnClic
 
 
         sortWay.setOnClickListener(this);
+
+        WindowUtil.setStatusBar(this);
 
         imageUrlData = new ArrayList<>();
         contentData = new ArrayList<>();

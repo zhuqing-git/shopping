@@ -30,11 +30,14 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.zhuqing.shopping.R;
 import com.zhuqing.shopping.db.User;
+import com.zhuqing.shopping.fragments.CommodityFragment;
 import com.zhuqing.shopping.fragments.FansFragment;
 import com.zhuqing.shopping.fragments.MyFragment1;
 import com.zhuqing.shopping.fragments.MyFragment2;
 import com.zhuqing.shopping.fragments.MyFragment3;
+import com.zhuqing.shopping.fragments.TieziFragment;
 import com.zhuqing.shopping.nav_activity.Fans;
+import com.zhuqing.shopping.util.WindowUtil;
 
 import org.litepal.LitePal;
 import org.litepal.crud.DataSupport;
@@ -51,9 +54,12 @@ public class ExchangeActivity extends AppCompatActivity implements View.OnClickL
     ViewPager fansViewPager;
     List<Fragment> fansFragments;
     TextView titleView;
+    int status=0;
 
 
-    String[] fansTitle = {"我的关注", "我的粉丝"};
+    String[] publicTlte = {"我的帖子", "我的宝贝"};
+String[]sellTitle={""};
+    String[] buyTitle={"买到的宝贝"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -79,19 +85,41 @@ public class ExchangeActivity extends AppCompatActivity implements View.OnClickL
             actionBar.setDisplayHomeAsUpEnabled(true);
             //actionBar.setHomeAsUpIndicator(R.drawable.d1);//设置背景图片
         }
+        WindowUtil.setStatusBar(this);
 
-        fansFragments=new ArrayList<>();
-        fansFragments.add(new FansFragment(0));
-        fansFragments.add(new FansFragment(0));
-
-        adapter   madapter1 = new adapter(getSupportFragmentManager(), fansFragments);
-        fansViewPager.setAdapter(madapter1);
-        tabLayout.setupWithViewPager(fansViewPager);
 
         Intent intent=getIntent();
-        Boolean state= intent.getBooleanExtra("state",false);
-        if(state)
-            tabLayout.getTabAt(1).select();
+        String state= intent.getStringExtra("state");
+        if(state.equals("我发布的"))
+        {
+            this.status=0;
+            tabLayout.setVisibility(View.VISIBLE);
+            fansFragments=new ArrayList<>();
+            fansFragments.add(new TieziFragment());
+            fansFragments.add(new CommodityFragment(3));
+            adapter   madapter1 = new adapter(getSupportFragmentManager(), fansFragments);
+            fansViewPager.setAdapter(madapter1);
+            tabLayout.setupWithViewPager(fansViewPager);
+
+        }
+       else if(state.equals("我卖出的"))
+        {
+            this.status=1;
+            tabLayout.setVisibility(View.GONE);
+            fansFragments=new ArrayList<>();
+            fansFragments.add(new CommodityFragment(3));
+            adapter   madapter1 = new adapter(getSupportFragmentManager(), fansFragments);
+            fansViewPager.setAdapter(madapter1);
+        } else
+        {
+            this.status=2;
+            tabLayout.setVisibility(View.GONE);
+            fansFragments=new ArrayList<>();
+            fansFragments.add(new CommodityFragment(3));
+            adapter   madapter1 = new adapter(getSupportFragmentManager(), fansFragments);
+            fansViewPager.setAdapter(madapter1);
+        }
+
 
 
 
@@ -139,7 +167,11 @@ public class ExchangeActivity extends AppCompatActivity implements View.OnClickL
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
-            return fansTitle[position];
+            if (status==0)
+            return publicTlte[position];
+            else if (status==1)
+                return sellTitle[position];
+            else return buyTitle[position];
 
         }
     }

@@ -102,7 +102,7 @@ android:layout_marginTop="10dp"
                 android:layout_height="20dp"
                 android:layout_gravity="bottom|center_horizontal"
                 android:gravity="bottom|center"
-                android:text="动态"
+                android:text="记录"
                 android:textSize="16sp"
                />
         </LinearLayout>

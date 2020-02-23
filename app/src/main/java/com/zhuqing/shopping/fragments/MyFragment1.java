@@ -29,7 +29,9 @@ import java.util.Random;
 public class MyFragment1 extends Fragment {
     Banner myBanner;
     List<Integer> imageUrlData;
+    List<Integer> imageList=new ArrayList<>();
     List<String> contentData;
+
 
 
     private String[] data = {"apple", "pear"};
@@ -38,11 +40,13 @@ public class MyFragment1 extends Fragment {
 
     //region 初始化recycleView
     private void initFruits() {
+        imageList.add(R.drawable.a1);
+        imageList.add(R.drawable.d1);
         for (int i = 0; i < 20; i++) {
-            Commodity apple = new Commodity(getRandomLengthName("Apple"), R.drawable.a1);
+            Commodity apple = new Commodity(1, "这里是内容", 20, 120,
+                    124, 3,  imageList,null);
             fruitList.add(apple);
-            Commodity pear = new Commodity(getRandomLengthName("Pear"), R.drawable.pear);
-            fruitList.add(pear);
+
         }
     }
 

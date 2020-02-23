@@ -43,14 +43,16 @@ public class SortActivity extends AppCompatActivity implements View.OnClickListe
 
     private String[] data = {"apple", "pear"};
     private List<Commodity> fruitList = new ArrayList<>();
+    private List<Integer> imageList=new ArrayList<>();
 
     //region 初始化recycleView
     private void initFruits() {
+        imageList.add(R.drawable.a1);
         for (int i = 0; i < 20; i++) {
-            Commodity apple = new Commodity(getRandomLengthName("Apple"), R.drawable.a1);
+            Commodity apple = new Commodity(1, "这里是内容", 20, 120,
+                    124, 3,  imageList,null);
             fruitList.add(apple);
-            Commodity pear = new Commodity(getRandomLengthName("Pear"), R.drawable.pear);
-            fruitList.add(pear);
+
         }
     }
 

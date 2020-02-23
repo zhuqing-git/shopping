@@ -23,13 +23,16 @@ public class TopicRight extends Fragment {
 
     RecyclerView recyclerView;
     List<Commodity> topicRightList= new ArrayList<>();
+    private List<Integer> imageList=new ArrayList<>();
 
     private void initFruits() {
+        imageList.add(R.drawable.a1);
+        imageList.add(R.drawable.d1);
         for (int i = 0; i < 20; i++) {
-            Commodity apple = new Commodity("Apple", R.drawable.a1);
+            Commodity apple = new Commodity(1, "这里是内容", 20, 120,
+                    124, 3,  imageList,null);
             topicRightList.add(apple);
-            Commodity pear = new Commodity("Pear", R.drawable.pear);
-            topicRightList.add(pear);
+            
         }
     }
 

@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         imagePersiion.setOnClickListener(this);
         navImagePerson.setOnClickListener(this);
+        rightCirclaImageView.setOnClickListener(this);
 //        imagePersion_sort.setOnClickListener(this);
 
 
@@ -159,6 +160,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Intent intent3 = new Intent(MainActivity.this, ExchangeActivity.class);
                         intent3.putExtra("state", "我买到的");
                         startActivity(intent3);
+                        break;
+                    case R.id.nav_test:
+                        drawerLayout.closeDrawers();
+                        viewPager1.setVisibility(View.GONE);
+                        tabLayout.setVisibility(View.GONE);
+                        searchView1.setVisibility(View.GONE);
+                        //  rightCirclaImageView.setVisibility(View.GONE);
+
+                        searchViewText.setVisibility(View.VISIBLE);
+                        searchViewText.setText("社区");
+
+
+
+
+                        viewPager2.setVisibility(View.VISIBLE);
+                        viewPager2.setCurrentItem(2);
+
+
+
+                        //禁止appbar滑动隐藏
+                        params.setScrollFlags(0);
                         break;
 
 
@@ -313,64 +335,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-    //region 设置appbar不划动隐藏（没用）
-//    boolean forbidAppBarScroll=false;
-//    private void forbidAppBarScroll(boolean forbid) {
-//        if (forbid == forbidAppBarScroll) {
-//            return;
-//        }
-//        if (forbid) {
-//            forbidAppBarScroll = true;
-//            if (ViewCompat.isLaidOut(appBar)) {
-//                setAppBarDragCallback(new AppBarLayout.Behavior.DragCallback() {
-//
-//                    @Override public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
-//                        return false;
-//                    }
-//                });
-//            } else {
-//                appBar.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//                    @Override public void onGlobalLayout() {
-//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//                            appBar.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-//                        } else {
-//                            appBar.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-//                        }
-//                        setAppBarDragCallback(new AppBarLayout.Behavior.DragCallback() {
-//
-//                            @Override public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
-//                                return false;
-//                            }
-//                        });
-//                    }
-//                });
-//            }
-//        } else {
-//            forbidAppBarScroll = false;
-//            if (ViewCompat.isLaidOut(appBar)) {
-//                setAppBarDragCallback(null);
-//            } else {
-//                appBar.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//                    @Override public void onGlobalLayout() {
-//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-//                            appBar.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-//                        } else {
-//                            appBar.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-//                        }
-//                        setAppBarDragCallback(null);
-//                    }
-//                });
-//            }
-//        }
-//    }
-//
-//    public void setAppBarDragCallback(AppBarLayout.Behavior.DragCallback dragCallback) {
-//        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) appBar.getLayoutParams();
-//        AppBarLayout.Behavior behavior = (AppBarLayout.Behavior) params.getBehavior();
-//        behavior.setDragCallback(dragCallback);
-//    }
-    //endregion
-
 
     /**
      * 适配菜单项
@@ -395,6 +359,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.image_person:
                 Intent intent = new Intent(this, DynamicActivity.class);
                 startActivity(intent);
+            case R.id.main_right_circleimageview:
+                Intent intent1=new Intent(this,PublicActivity.class);
+                startActivity(intent1);
+
                 break;
 
             default:

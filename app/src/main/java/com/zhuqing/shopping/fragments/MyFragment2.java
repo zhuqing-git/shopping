@@ -32,6 +32,7 @@ public class MyFragment2 extends Fragment {
     List<Integer> imageUrlData;
     List<String> contentData;
     int status;
+    private List<Integer> imageList=new ArrayList<>();
 
     public MyFragment2(int status){
         this.status=status;
@@ -45,10 +46,14 @@ public class MyFragment2 extends Fragment {
 
     //region 初始化recycleView
     private void initFruits() {
+        imageList.add(R.drawable.d1);
+        imageList.add(R.drawable.a1);
         for (int i = 0; i < 20; i++) {
-            Commodity apple = new Commodity(getRandomLengthName("Apple"), R.drawable.a1);
+            Commodity apple = new Commodity(1, "这里是内容", 20, 120,
+                    124, 3,  imageList,null);
             fruitList.add(apple);
-            Commodity pear = new Commodity(getRandomLengthName("Pear"), R.drawable.pear);
+            Commodity pear = new Commodity(1, "这里是内容", 20, 120,
+                    124, 3,  imageList,null);
             fruitList.add(pear);
         }
     }
@@ -72,15 +77,18 @@ public class MyFragment2 extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.page2_recyclerView);
         if(status==0)
         {
+            //网格视图
             GridLayoutManager manager = new GridLayoutManager(getContext(), 2);
             recyclerView.setLayoutManager(manager);
         }else if(status==1)
         {
+            //线性视图
             LinearLayoutManager manager=new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(manager);
         }
         else if(status==2)
         {
+            //禁止横向滑动
             CustomLinearLayoutManager manager=new CustomLinearLayoutManager(getContext());
             recyclerView.setLayoutManager(manager);
         }

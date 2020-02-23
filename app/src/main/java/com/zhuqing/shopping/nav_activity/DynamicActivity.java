@@ -39,7 +39,7 @@ public class DynamicActivity extends AppCompatActivity implements View.OnClickLi
     LinearLayout dynamicLinearLayout;
 
 
-    String[] fansTitle = {"我的关注", "我的粉丝"};
+    String[] fansTitle = {"备忘录", "日记"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

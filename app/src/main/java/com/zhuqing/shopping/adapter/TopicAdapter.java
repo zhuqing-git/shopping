@@ -73,8 +73,8 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull TopicAdapter.ViewHolder holder, int position) {
 
         Commodity commodity = mTopicList.get(position);
-            holder.commodityImage.setImageResource(commodity.getImageid());
-            holder.commodityName.setText(commodity.getTitle());
+            holder.commodityImage.setImageResource(commodity.getOneImage(0));
+            holder.commodityName.setText(commodity.getContent());
 
 
     }

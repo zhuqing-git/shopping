@@ -11,6 +11,20 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+    allprojects {
+        repositories {
+            jcenter()
+            maven { url 'https://jitpack.io' }
+            maven { url 'https://maven.google.com' }
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -29,15 +43,19 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.android.support:design:28.0.0'
-    //implementation 'de.hdodenhof:circleimageview:2.1.0'
+
     implementation 'androidx.recyclerview:recyclerview-selection:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    implementation 'com.github.bumptech.glide:glide:3.7.0'//glide处理图片
+
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'//glide处理图片
+
     implementation 'com.youth.banner:banner:1.4.10' //轮播
     implementation 'org.litepal.android:core:1.4.1'
     implementation 'com.squareup.okhttp3:okhttp:3.4.1'
     implementation 'com.google.code.gson:gson:2.7'
     implementation 'de.hdodenhof:circleimageview:3.1.0'//边缘高亮园图片
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.4.6'//图片网格化
 
 }

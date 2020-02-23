@@ -21,9 +21,17 @@ import com.zhuqing.shopping.entity.Tiezi;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.internal.Internal;
+
 public class CommunityFragmentPage1 extends Fragment {
     private List<Commodity> topicList=new ArrayList<>();
     private List<Tiezi> tieziList=new ArrayList<>();
+    private List<Integer> imageList= new ArrayList<>();
+
+
+
+
+
 
 
     private void initTiezi() {
@@ -37,11 +45,13 @@ public class CommunityFragmentPage1 extends Fragment {
 
 
     private void initTopic() {
+
+        imageList.add(R.drawable.a1);
+        imageList.add(R.drawable.d1);
         for (int i = 0; i < 20; i++) {
-            Commodity apple = new Commodity("综合", R.drawable.a1);
+            Commodity apple = new Commodity(1, "这里是内容", 20, 120,
+                    124, 3,  imageList,null);
             topicList.add(apple);
-            Commodity pear = new Commodity("Pear", R.drawable.a1);
-            topicList.add(pear);
         }
     }
 
@@ -54,6 +64,7 @@ public class CommunityFragmentPage1 extends Fragment {
 
         recyclerView1=(RecyclerView)view.findViewById(R.id.community_page1_recycleview1);
         recyclerView2=(RecyclerView)view.findViewById(R.id.community_page1_recycleview2);
+
 
 
         LinearLayoutManager layoutManager1=new LinearLayoutManager(getContext());
