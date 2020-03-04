@@ -82,6 +82,7 @@
         <item name="picture.folder_checked_dot">@drawable/picture_orange_oval</item>
     </style>
 
+
     <!--默认样式，注意每一项都不能少-->
     <style name="picture.default.style" parent="Base.Theme.NoActionBar">
         <!-- Customize your theme here. -->
@@ -110,15 +111,15 @@
         <!--图片列表底部背景色-->
         <item name="picture.bottom.bg">@color/colorPrimary</item>
         <!--图片列表预览文字颜色-->
-        <item name="picture.preview.textColor">@color/colorPrimary</item>
+        <item name="picture.preview.textColor">@color/colorWhite</item>
         <!--图片列表已完成文字颜色-->
-        <item name="picture.complete.textColor">@color/colorPrimary</item>
+        <item name="picture.complete.textColor">@color/colorWhite</item>
         <!--图片已选数量圆点背景色-->
         <item name="picture.num.style">@drawable/picture_num_oval</item>
         <!--预览界面标题文字颜色-->
         <item name="picture.ac_preview.title.textColor">@color/picture_color_white</item>
         <!--预览界面已完成文字颜色-->
-        <item name="picture.ac_preview.complete.textColor">@color/colorPrimary</item>
+        <item name="picture.ac_preview.complete.textColor">@color/colorWhite</item>
         <!--预览界面标题栏背景色-->
         <item name="picture.ac_preview.title.bg">@color/colorPrimary</item>
         <!--预览界面底部背景色-->
@@ -133,6 +134,11 @@
         <item name="picture.crop.title.color">@color/picture_color_white</item>
         <!--相册文件夹列表选中图标-->
         <item name="picture.folder_checked_dot">@drawable/picture_orange_oval</item>
+    </style>
+
+    <style name="mypopwindow_anim_style">
+        <item name="android:windowEnterAnimation">@anim/popshow_anim</item>
+        <item name="android:windowExitAnimation">@anim/pophidden_anim</item>
     </style>
 
 

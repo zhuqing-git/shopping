@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.google.gson.JsonObject;
+import com.zhuqing.shopping.db.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,22 +18,21 @@ public class LoginUtility {
     /**
      * 解析和处理服务器返回的登录数据
      */
-    public static boolean HandleLoginResponse(String response) throws JSONException {
+    public static String HandleLoginResponse(String response) throws JSONException {
 
         try{
             JSONObject re=new JSONObject(response);
             if (re.get("result").equals("true"))
-                return true;
+                return (String) re.get("userId");
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         System.out.println("------------------------------------------------------------");
-
-
-
-        return false;
-
+        return "0";
 
     }
+//    public static int GetUserId(){
+//       // User user=
+//    }
 }

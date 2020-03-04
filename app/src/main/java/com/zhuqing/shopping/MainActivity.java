@@ -11,9 +11,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import android.annotation.SuppressLint;
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -41,7 +44,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
+
+
     Context context = this;
+
+
     ImageButton imageButton;
     Toolbar toolbar;
     CoordinatorLayout coordinatorLayout;
@@ -89,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imagePersiion = (CircleImageView) findViewById(R.id.image_persion);
         rightCirclaImageView=(CircleImageView)findViewById(R.id.main_right_circleimageview);
          headerLayout = navigationView.inflateHeaderView(R.layout.nav_hander);
-        navImagePerson = headerLayout.findViewById(R.id.image_person);
+        navImagePerson = headerLayout.findViewById(R.id.nav_head_image_person);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout);
@@ -103,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //
 //        }
 
+        Log.d("test", String.valueOf(Build.VERSION.SDK_INT));
 
         imagePersiion.setOnClickListener(this);
         navImagePerson.setOnClickListener(this);
@@ -356,9 +364,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.image_persion:
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
-            case R.id.image_person:
+            case R.id.nav_head_image_person:
                 Intent intent = new Intent(this, DynamicActivity.class);
                 startActivity(intent);
+                break;
             case R.id.main_right_circleimageview:
                 Intent intent1=new Intent(this,PublicActivity.class);
                 startActivity(intent1);

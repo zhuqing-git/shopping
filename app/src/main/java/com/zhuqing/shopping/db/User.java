@@ -1,21 +1,24 @@
 package com.zhuqing.shopping.db;
 
-import org.litepal.crud.DataSupport;
+import org.litepal.LitePal;
+import org.litepal.LitePalApplication;
+import org.litepal.annotation.Column;
+import org.litepal.crud.LitePalSupport;
 
-public class User extends DataSupport {
-    private int id;
+
+public class User extends LitePalSupport {
+
+
+
+
+    private int userId;
     private String name;
     private String password;
+
     private int phone;
     private int age;
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -47,5 +50,13 @@ public class User extends DataSupport {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

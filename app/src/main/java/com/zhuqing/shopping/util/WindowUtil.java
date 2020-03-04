@@ -24,7 +24,7 @@ public class WindowUtil {
 
     public static int  getWindowWidth(Context context){
 
-       return  context.getApplicationContext().getApplicationContext().getResources()
+       return  context.getApplicationContext().getResources()
                 .getDisplayMetrics().widthPixels;
 
     }

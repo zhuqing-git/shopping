@@ -31,12 +31,13 @@ public class MyFragment2 extends Fragment {
 
     List<Integer> imageUrlData;
     List<String> contentData;
-    int status;
+    int status=0;
     private List<Integer> imageList=new ArrayList<>();
 
     public MyFragment2(int status){
         this.status=status;
     }
+    public MyFragment2(){}
 
 
 

@@ -77,10 +77,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     public void onResponse(Call call, Response response) throws IOException {
                         String responseText = response.body().string();
                         try {
-                            boolean result= LoginUtility.HandleLoginResponse(responseText);
-                            if (result)
+                            String userId= LoginUtility.HandleLoginResponse(responseText);
+                            if (!userId.equals(""))
                             {
                                editor.putBoolean("verification",true);
+                               editor.putInt("userId", Integer.parseInt(userId));
                                editor.apply();
                                 Intent intent=new Intent(RegisterActivity.this,MainActivity.class);
                                 startActivity(intent);

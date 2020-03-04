@@ -50,7 +50,7 @@
 
 
                 <ImageButton
-                    android:id="@+id/main_right_circleimageview"
+                    android:id="@+id/public_right_circleimageview"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -97,40 +97,28 @@
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:background="@color/colorWhite"
+                        android:gravity="start"
+                        android:id="@+id/public_edittext"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:cursorVisible="true"
+                        android:textCursorDrawable="@null"
+
                         />
 
 
 
-                    <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
 
                         <GridView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:columnWidth="100dp"
+                            android:layout_height="80dp"
+                            android:columnWidth="80dp"
+
                             android:gravity="top"
-                            android:horizontalSpacing="10dp"
-                            android:numColumns="auto_fit"
-
-
-
-
-                            android:verticalSpacing="10dp"
+                            android:horizontalSpacing="5dp"
+                            android:numColumns="6"
                             android:stretchMode="columnWidth"
                             android:id="@+id/public_gridview"/>
-
-
-
-
-                    </ScrollView>
-
-
-
-
-
-
-
 
 
 
@@ -188,6 +176,29 @@
 
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="上传"
+                    android:id="@+id/public_popwindow"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="提交"
+                    android:id="@+id/public_tijiao"/>
+
+            </LinearLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/public_test"/>
+
         </LinearLayout>
 
 

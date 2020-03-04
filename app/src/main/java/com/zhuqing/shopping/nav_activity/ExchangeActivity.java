@@ -40,7 +40,7 @@ import com.zhuqing.shopping.nav_activity.Fans;
 import com.zhuqing.shopping.util.WindowUtil;
 
 import org.litepal.LitePal;
-import org.litepal.crud.DataSupport;
+
 
 import java.util.ArrayList;
 import java.util.List;
