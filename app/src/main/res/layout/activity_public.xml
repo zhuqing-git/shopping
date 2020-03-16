@@ -56,7 +56,7 @@
                     android:layout_weight="1"
                     android:background="@color/colorPrimary"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/d16" />
+                    android:src="@drawable/default_head" />
 
 
             </LinearLayout>
@@ -176,6 +176,34 @@
 
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/colorWhite"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom"
+                    android:gravity="bottom"
+                    android:text="价格："/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom"
+                    android:focusable="true"
+                    android:background="@color/colorWhite"
+                    android:focusableInTouchMode="true"
+                    android:cursorVisible="true"
+                    android:textCursorDrawable="@null"
+                    android:gravity="bottom|start"
+                    android:id="@+id/public_money"
+                    />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -190,7 +218,7 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="提交"
+                    android:text="发布"
                     android:id="@+id/public_tijiao"/>
 
             </LinearLayout>

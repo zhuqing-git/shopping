@@ -12,21 +12,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.zhuqing.shopping.R;
-import com.zhuqing.shopping.adapter.CommodityAdapter;
 import com.zhuqing.shopping.adapter.TieziAdapter;
 import com.zhuqing.shopping.adapter.TopicAdapter;
 import com.zhuqing.shopping.entity.Commodity;
 import com.zhuqing.shopping.entity.Tiezi;
 
+import org.litepal.LitePal;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.internal.Internal;
 
 public class CommunityFragmentPage1 extends Fragment {
     private List<Commodity> topicList=new ArrayList<>();
     private List<Tiezi> tieziList=new ArrayList<>();
-    private List<Integer> imageList= new ArrayList<>();
+    private List<String> imageList= new ArrayList<>();
 
 
 
@@ -36,7 +35,7 @@ public class CommunityFragmentPage1 extends Fragment {
 
     private void initTiezi() {
         for (int i = 0; i < 20; i++) {
-            Tiezi apple = new Tiezi("用户名",R.drawable.d16,"标题","这里是内容","综合",12,
+            Tiezi apple = new Tiezi("用户名",R.drawable.default_head,"标题","这里是内容","综合",12,
                     20,R.drawable.aaaa,R.drawable.aaaa,R.drawable.aaaa);
             tieziList.add(apple);
         }
@@ -46,11 +45,10 @@ public class CommunityFragmentPage1 extends Fragment {
 
     private void initTopic() {
 
-        imageList.add(R.drawable.a1);
-        imageList.add(R.drawable.d1);
+        imageList.add(String.valueOf(R.drawable.a1));
+        imageList.add(String.valueOf(R.drawable.d1));
         for (int i = 0; i < 20; i++) {
-            Commodity apple = new Commodity(1, "这里是内容", 20, 120,
-                    124, 3,  imageList,null);
+            Commodity apple = LitePal.findFirst(Commodity.class);
             topicList.add(apple);
         }
     }

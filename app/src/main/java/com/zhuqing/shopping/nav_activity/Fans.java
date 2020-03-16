@@ -2,15 +2,10 @@ package com.zhuqing.shopping.nav_activity;
 
 
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -19,33 +14,16 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.zhuqing.shopping.R;
-import com.zhuqing.shopping.db.User;
 import com.zhuqing.shopping.fragments.FansFragment;
-import com.zhuqing.shopping.fragments.MyFragment1;
-import com.zhuqing.shopping.fragments.MyFragment2;
-import com.zhuqing.shopping.fragments.MyFragment3;
-import com.zhuqing.shopping.nav_activity.Fans;
 import com.zhuqing.shopping.util.WindowUtil;
-
-import org.litepal.LitePal;
 
 
 import java.util.ArrayList;
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Fans extends AppCompatActivity implements View.OnClickListener{
 

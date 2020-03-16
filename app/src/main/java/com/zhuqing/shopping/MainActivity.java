@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.material.appbar.AppBarLayout;
@@ -54,12 +55,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     CoordinatorLayout coordinatorLayout;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    CircleImageView imagePersiion,rightCirclaImageView;
+    CircleImageView imagePersiion;
     CircleImageView navImagePerson;
     //    CircleImageView imagePersion_sort;
     SearchView searchView1;
     TextView searchViewText;
     TabLayout tabLayout;
+    ImageView rightCirclaImageView;
     ViewPager viewPager1;
     CustomViewPager viewPager2;
     List<Fragment> fragments1, fragments2;
@@ -94,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigationView);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         imagePersiion = (CircleImageView) findViewById(R.id.image_persion);
-        rightCirclaImageView=(CircleImageView)findViewById(R.id.main_right_circleimageview);
+        rightCirclaImageView=(ImageView) findViewById(R.id.main_right_circleimageview);
          headerLayout = navigationView.inflateHeaderView(R.layout.nav_hander);
         navImagePerson = headerLayout.findViewById(R.id.nav_head_image_person);
 
@@ -193,7 +195,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
                     default:
+                       // navigationView.setCheckedItem(R.id.nav_main);
                         drawerLayout.closeDrawers();
+//                     runOnUiThread(new Runnable() {
+//                         @Override
+//                         public void run() {
+//                             Toast.makeText(MainActivity.this,"hello",Toast.LENGTH_SHORT).show();
+//                         }
+//                     });
+
 
                         break;
                 }
@@ -206,18 +216,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //region 添加碎片
         fragments1 = new ArrayList<>();
         fragments1.add(new MyFragment1());
-        fragments1.add(new MyFragment2(0));
-        fragments1.add(new MyFragment2(0));
-        fragments1.add(new MyFragment2(0));
-        fragments1.add(new MyFragment2(0));
-        fragments1.add(new MyFragment2(0));
-        fragments1.add(new MyFragment2(0));
-        fragments1.add(new MyFragment2(0));
-        fragments1.add(new MyFragment2(0));
+//        fragments1.add(new MyFragment2(0));
+//        fragments1.add(new MyFragment2(0));
+//        fragments1.add(new MyFragment2(0));
+//        fragments1.add(new MyFragment2(0));
+//        fragments1.add(new MyFragment2(0));
+//        fragments1.add(new MyFragment2(0));
+//        fragments1.add(new MyFragment2(0));
+//        fragments1.add(new MyFragment2(0));
 
         fragments2 = new ArrayList<>();
         fragments2.add(new MyFragment3());
-        fragments2.add(new MyFragment2(2));
+//        fragments2.add(new MyFragment2(2));
         fragments2.add(new CommunityFragment());
         //endregion
 
@@ -363,6 +373,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.image_persion:
                 drawerLayout.openDrawer(GravityCompat.START);
+                navigationView.setCheckedItem(R.id.nav_main);
                 break;
             case R.id.nav_head_image_person:
                 Intent intent = new Intent(this, DynamicActivity.class);

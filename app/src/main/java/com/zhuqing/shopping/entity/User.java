@@ -1,4 +1,4 @@
-package com.zhuqing.shopping.db;
+package com.zhuqing.shopping.entity;
 
 import org.litepal.LitePal;
 import org.litepal.LitePalApplication;

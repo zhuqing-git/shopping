@@ -58,9 +58,9 @@
                                 android:id="@+id/image_persion"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
+                                android:layout_weight="2"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/d16" />
+                                android:src="@drawable/default_head" />
 
 
                             <androidx.appcompat.widget.SearchView
@@ -68,7 +68,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
-                                android:layout_weight="8"
+                                android:layout_weight="16"
                                 android:background="@drawable/yuan"
 
                                 app:iconifiedByDefault="false"
@@ -78,7 +78,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:visibility="gone"
-                                android:layout_weight="8"
+                                android:layout_weight="16"
                                 android:text="分类"
                                 android:layout_margin="10dp"
 
@@ -93,13 +93,15 @@
 
 
 
-                            <de.hdodenhof.circleimageview.CircleImageView
+                            <ImageView
+
+
                                 android:id="@+id/main_right_circleimageview"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/d16" />
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/public_commody" />
 
 
                         </LinearLayout>

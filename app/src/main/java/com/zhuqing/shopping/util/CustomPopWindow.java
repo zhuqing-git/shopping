@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ public class CustomPopWindow extends PopupWindow {
     private void initView() {
         TextView textView1=view.findViewById(R.id.window_pop_1);
         TextView textView2=view.findViewById(R.id.window_pop_2);
+        TextView textView3=view.findViewById(R.id.window_pop_3);
 //        final LinearLayout popBg = view.findViewById(R.id.pop_bg);
 //        LinearLayout weChatShare = view.findViewById(R.id.ll_wechat_share);
 //        LinearLayout weChatZone = view.findViewById(R.id.ll_wechat_zone);
@@ -42,6 +44,7 @@ public class CustomPopWindow extends PopupWindow {
 //        TextView cancelTv = view.findViewById(R.id.share_cancel);
         textView1.setOnClickListener(itemClick);
         textView2.setOnClickListener(itemClick);
+        textView3.setOnClickListener(itemClick);
 //
 //        weChatShare.setOnClickListener(itemClick);
 //        weChatZone.setOnClickListener(itemClick);
@@ -63,7 +66,7 @@ public class CustomPopWindow extends PopupWindow {
 
         this.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
         // 设置弹出窗体的高
-        this.setHeight(170);
+        this.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
         // 设置弹出窗体可点击()
         this.setFocusable(true);
         this.setOutsideTouchable(true);

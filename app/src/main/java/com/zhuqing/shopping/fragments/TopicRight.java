@@ -16,6 +16,8 @@ import com.zhuqing.shopping.R;
 import com.zhuqing.shopping.adapter.CommodityAdapter;
 import com.zhuqing.shopping.entity.Commodity;
 
+import org.litepal.LitePal;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,14 +25,13 @@ public class TopicRight extends Fragment {
 
     RecyclerView recyclerView;
     List<Commodity> topicRightList= new ArrayList<>();
-    private List<Integer> imageList=new ArrayList<>();
+    private List<String> imageList=new ArrayList<>();
 
     private void initFruits() {
-        imageList.add(R.drawable.a1);
-        imageList.add(R.drawable.d1);
+        imageList.add(String.valueOf(R.drawable.a1));
+        imageList.add(String.valueOf(R.drawable.d1));
         for (int i = 0; i < 20; i++) {
-            Commodity apple = new Commodity(1, "这里是内容", 20, 120,
-                    124, 3,  imageList,null);
+            Commodity apple = LitePal.findFirst(Commodity.class);
             topicRightList.add(apple);
             
         }
@@ -45,7 +46,7 @@ public class TopicRight extends Fragment {
         LinearLayoutManager manager=new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(manager);
         initFruits();
-        CommodityAdapter adapter=new CommodityAdapter(topicRightList,1);
+        CommodityAdapter adapter=new CommodityAdapter(topicRightList,1,0);
         recyclerView.setAdapter(adapter);
         Log.d("test","create");
        return view;

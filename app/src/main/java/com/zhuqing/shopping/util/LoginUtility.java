@@ -1,18 +1,7 @@
 package com.zhuqing.shopping.util;
 
-import android.text.TextUtils;
-import android.util.Log;
-import android.widget.TextView;
-
-import com.google.gson.JsonObject;
-import com.zhuqing.shopping.db.User;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONStringer;
-
-import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 public class LoginUtility {
     /**
@@ -28,7 +17,7 @@ public class LoginUtility {
             e.printStackTrace();
         }
 
-        System.out.println("------------------------------------------------------------");
+
         return "0";
 
     }

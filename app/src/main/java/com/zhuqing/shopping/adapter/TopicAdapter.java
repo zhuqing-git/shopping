@@ -1,6 +1,7 @@
 package com.zhuqing.shopping.adapter;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.zhuqing.shopping.MsgActivity;
 import com.zhuqing.shopping.R;
 import com.zhuqing.shopping.entity.Commodity;
 import com.zhuqing.shopping.entity.TopicLeft;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 import static org.litepal.LitePalApplication.getContext;
@@ -73,8 +77,11 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull TopicAdapter.ViewHolder holder, int position) {
 
         Commodity commodity = mTopicList.get(position);
-            holder.commodityImage.setImageResource(commodity.getOneImage(0));
-            holder.commodityName.setText(commodity.getContent());
+        FileInputStream inputStream= null;
+        Glide.with(getContext()).load(commodity.getImageList().get(0)).into(holder.commodityImage);
+        holder.commodityName.setText(commodity.getContent());
+
+
 
 
     }

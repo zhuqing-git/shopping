@@ -3,25 +3,20 @@ package com.zhuqing.shopping;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.youth.banner.loader.ImageLoader;
 import com.zhuqing.shopping.adapter.CommodityAdapter;
 import com.zhuqing.shopping.entity.Commodity;
+
+import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,14 +38,13 @@ public class SortActivity extends AppCompatActivity implements View.OnClickListe
 
     private String[] data = {"apple", "pear"};
     private List<Commodity> fruitList = new ArrayList<>();
-    private List<Integer> imageList=new ArrayList<>();
+    private List<String> imageList=new ArrayList<>();
 
     //region 初始化recycleView
     private void initFruits() {
-        imageList.add(R.drawable.a1);
+        imageList.add(String.valueOf(R.drawable.a1));
         for (int i = 0; i < 20; i++) {
-            Commodity apple = new Commodity(1, "这里是内容", 20, 120,
-                    124, 3,  imageList,null);
+            Commodity apple = LitePal.findFirst(Commodity.class);
             fruitList.add(apple);
 
         }
@@ -75,7 +69,7 @@ public class SortActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView = findViewById(R.id.sort_recyclerView);
         drawerLayout = (DrawerLayout) findViewById(R.id.sort_drawer_layout);
         sortWay = (CircleImageView) findViewById(R.id.sort_way);
-        adapter = new CommodityAdapter(fruitList,0);
+        adapter = new CommodityAdapter(fruitList,0,0);
 
         toolbar = (Toolbar) findViewById(R.id.sort_toolbar);
         setSupportActionBar(toolbar);
@@ -90,9 +84,9 @@ public class SortActivity extends AppCompatActivity implements View.OnClickListe
 
         imageUrlData = new ArrayList<>();
         contentData = new ArrayList<>();
-        imageUrlData.add(R.drawable.d16);
-        imageUrlData.add(R.drawable.d16);
-        imageUrlData.add(R.drawable.d16);
+        imageUrlData.add(R.drawable.default_head);
+        imageUrlData.add(R.drawable.default_head);
+        imageUrlData.add(R.drawable.default_head);
         contentData.add("头像");
         contentData.add("头像");
         contentData.add("头像");
@@ -144,16 +138,7 @@ public class SortActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
-//    private class Myloader extends ImageLoader {
-//
-//        @Override
-//        public void displayImage(Context context, Object path, ImageView imageView) {
-//
-//
-//            Glide.with(context).load(path).into(imageView);
-//
-//        }
-//    }
+
 }
 
 

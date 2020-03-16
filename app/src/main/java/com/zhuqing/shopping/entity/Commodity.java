@@ -2,30 +2,74 @@ package com.zhuqing.shopping.entity;
 
 import android.provider.ContactsContract;
 
+import com.google.gson.annotations.SerializedName;
+
+import org.litepal.crud.LitePalSupport;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class Commodity {
+public class Commodity extends LitePalSupport {
+
     private String content;
-    private int money,praise,message,collection,userID;
+    private int money,praise,message,collection;
+    @SerializedName("topic")
+    private String topic;
+    @SerializedName("images")
+    private String images;
+    private SimpleDateFormat date;
 
-    private Date date;
-    private List<Integer>imageList;
+    private List<String>imageList;
+    @SerializedName("userId")
+    private int userID;
+    @SerializedName("cId")
+    private int commodyId;
 
-    public Commodity(int userID,String content,int money,int praise,int message,int collection,List<Integer>imageList,Date data) {
-        this.userID=userID;
-        this.content=content;
-        this.money=money;
-        this.praise=praise;
-        this.message=message;
-        this.collection=collection;
-        this.imageList=imageList;
-        this.date=date;
+    @SerializedName("state")
+    private int state;
+
+    @SerializedName("evaluate")
+    private int evaluate;
+
+    public int getState() {
+        return state;
     }
 
-    public  int getOneImage(int a)
-    {
-        return imageList.get(a);
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public int getEvaluate() {
+        return evaluate;
+    }
+
+    public void setEvaluate(int evaluate) {
+        this.evaluate = evaluate;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images;
+    }
+
+    public int getCommodyId() {
+        return commodyId;
+    }
+
+    public void setCommodyId(int commodyId) {
+        this.commodyId = commodyId;
     }
 
     public String getContent() {
@@ -36,11 +80,11 @@ public class Commodity {
         this.content = content;
     }
 
-    public Date getDate() {
+    public SimpleDateFormat getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(SimpleDateFormat date) {
         this.date = date;
     }
 
@@ -84,11 +128,11 @@ public class Commodity {
         this.userID = userID;
     }
 
-    public List<Integer> getImageList() {
+    public List<String> getImageList() {
         return imageList;
     }
 
-    public void setImageList(List<Integer> imageList) {
+    public void setImageList(List<String> imageList) {
         this.imageList = imageList;
     }
 }

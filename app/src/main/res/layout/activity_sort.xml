@@ -65,7 +65,7 @@
                             android:paddingLeft="10dp"
 
                             android:scaleType="centerCrop"
-                            android:src="@drawable/d16" />
+                            android:src="@drawable/default_head" />
 
 
                     </LinearLayout>

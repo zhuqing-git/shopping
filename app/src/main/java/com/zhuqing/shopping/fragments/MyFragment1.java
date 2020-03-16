@@ -2,6 +2,9 @@ package com.zhuqing.shopping.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.youth.banner.Banner;
@@ -21,64 +25,92 @@ import com.youth.banner.loader.ImageLoader;
 import com.zhuqing.shopping.R;
 import com.zhuqing.shopping.adapter.CommodityAdapter;
 import com.zhuqing.shopping.entity.Commodity;
+import com.zhuqing.shopping.util.HttpUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MyFragment1 extends Fragment {
+public class MyFragment1 extends Fragment implements View.OnClickListener {
     Banner myBanner;
     List<Integer> imageUrlData;
-    List<Integer> imageList=new ArrayList<>();
+    List<String> imageList=new ArrayList<>();
     List<String> contentData;
+    SwipeRefreshLayout swipeRefreshLayout;
+    RecyclerView recyclerView;
+     List<Commodity> commodityList = new ArrayList<>();
+    CommodityAdapter adapter1;
+    int state=0;
+    int flag=0;
 
 
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    adapter1.notifyDataSetChanged();
+                    swipeRefreshLayout.setRefreshing(false);
 
-    private String[] data = {"apple", "pear"};
-    private List<Commodity> fruitList = new ArrayList<>();
-
-
-    //region 初始化recycleView
-    private void initFruits() {
-        imageList.add(R.drawable.a1);
-        imageList.add(R.drawable.d1);
-        for (int i = 0; i < 20; i++) {
-            Commodity apple = new Commodity(1, "这里是内容", 20, 120,
-                    124, 3,  imageList,null);
-            fruitList.add(apple);
+                    break;
+                default:
+                    break;
+            }
 
         }
-    }
+    };
 
-    private String getRandomLengthName(String apple) {
-        Random random = new Random();
-        int length = random.nextInt(20) + 1;
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            builder.append(apple);
-        }
-        return builder.toString();
-    }
-    //endregion
+
+
+
+
+
+
+
+
+
+
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_page1, container, false);
-        initFruits();
-        RecyclerView recyclerView = view.findViewById(R.id.page1_recyclerView);
+
+         recyclerView = view.findViewById(R.id.page1_recyclerView);
+        swipeRefreshLayout=view.findViewById(R.id.fragment_page1_swipe);
+        myBanner = (Banner) view.findViewById(R.id.banner);
+
+
+
+
         GridLayoutManager manager = new GridLayoutManager(getContext(), 2);
         recyclerView.setLayoutManager(manager);
-        CommodityAdapter adapter = new CommodityAdapter(fruitList,0);
-        recyclerView.setAdapter(adapter);
 
-        myBanner = (Banner) view.findViewById(R.id.banner);
+        adapter1 = new CommodityAdapter(commodityList,flag,state);
+        refreshCommody();
+        recyclerView.setAdapter(adapter1);
+
+
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshCommody();
+
+            }
+        });
+
+
+
+
+
+
         imageUrlData = new ArrayList<>();
         contentData = new ArrayList<>();
-        imageUrlData.add(R.drawable.d16);
-        imageUrlData.add(R.drawable.d16);
-        imageUrlData.add(R.drawable.d16);
+        imageUrlData.add(R.drawable.default_head);
+        imageUrlData.add(R.drawable.default_head);
+        imageUrlData.add(R.drawable.default_head);
         contentData.add("头像");
         contentData.add("头像");
         contentData.add("头像");
@@ -94,6 +126,11 @@ public class MyFragment1 extends Fragment {
         return view;
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
+
 
     private class Myloader extends ImageLoader {
 
@@ -104,6 +141,31 @@ public class MyFragment1 extends Fragment {
             Glide.with(context).load(path).into(imageView);
 
         }
+    }
+
+
+    //region 初始化recycleView
+    private void refreshCommody() {
+        commodityList.clear();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    HttpUtil.GetUtil.GetCommody(commodityList,state) ;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+                Message msg = new Message();
+                msg.what = 1;
+                handler.sendMessage(msg);
+            }
+        }
+        ).start();
+
     }
 }
 

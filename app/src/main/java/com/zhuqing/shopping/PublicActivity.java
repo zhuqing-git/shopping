@@ -1,28 +1,19 @@
 package com.zhuqing.shopping;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -32,49 +23,44 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.annotation.GlideModule;
-import com.bumptech.glide.module.AppGlideModule;
+import com.google.gson.Gson;
+import com.google.gson.JsonParser;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.zhuqing.shopping.adapter.CustomGridAdapter;
-import com.zhuqing.shopping.db.User;
+import com.zhuqing.shopping.entity.Commodity;
+import com.zhuqing.shopping.util.Config;
 import com.zhuqing.shopping.util.CustomPopWindow;
 import com.zhuqing.shopping.util.GlideEngine;
 import com.zhuqing.shopping.util.HttpUtil;
+import com.zhuqing.shopping.util.LoginUtility;
 import com.zhuqing.shopping.util.ValueUtility;
 import com.zhuqing.shopping.util.WindowUtil;
 
 
-import org.litepal.LitePal;
-import org.w3c.dom.Text;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.nio.file.Path;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.StringJoiner;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
-public class PublicActivity extends AppCompatActivity  implements View.OnClickListener {
+public class PublicActivity extends AppCompatActivity implements View.OnClickListener {
 
     private String TAG = "PublicActivity";
 
@@ -88,10 +74,11 @@ public class PublicActivity extends AppCompatActivity  implements View.OnClickLi
     private List<LocalMedia> selectList;
     private GridView gridView;
     private List<String> imagePaths = new ArrayList<>();
-    private List<String> imagePutPaths=new ArrayList<>();
-    private EditText editText;
+    private List<String> imagePutPaths = new ArrayList<>();
+    private EditText editText,publicMoney;
     private Button popBtn, pubButton;
     private CustomPopWindow popWindow;
+
     CustomGridAdapter adapter;
 
 
@@ -111,6 +98,7 @@ public class PublicActivity extends AppCompatActivity  implements View.OnClickLi
         popBtn = findViewById(R.id.public_popwindow);
         pubButton = findViewById(R.id.public_tijiao);
         publicTest = findViewById(R.id.public_test);
+        publicMoney=findViewById(R.id.public_money);
 
 
         popBtn.setOnClickListener(this);
@@ -150,35 +138,16 @@ public class PublicActivity extends AppCompatActivity  implements View.OnClickLi
             case R.id.public_tijiao:
                 String contentSend = editText.getText().toString();
                 String topic = sortTextView.getText().toString();
+                String money=publicMoney.getText().toString();
 
-
-                MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
                 //File filc=new File(imagePutPaths.get(0));//原图上传
-                File file = new File(imagePaths.get(0));
-                String address = "http://192.168.43.28:8080/public_commodity";
-                if (file != null) {
-                    RequestBody body = RequestBody.create(MediaType.parse("image/*"), file);
-                    String fileName =file.getName();
-                    String userId= String.valueOf(ValueUtility.getUserId());
-                    requestBody.addFormDataPart("file", fileName, body).addFormDataPart("userId",userId).addFormDataPart("content"
-                    ,contentSend).addFormDataPart("topic",topic);
-                }
-                Request request = new Request.Builder().url(address).post(requestBody.build()).build();
-                HttpUtil.SendOkHttpRequest(address, request, new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
 
-                    }
+             boolean result=   HttpUtil.PublicUtil.PublicOneCommody(contentSend,topic,money,imagePaths,this);
+             if (result)
+                 finish();
 
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-
-                    }
-                });
                 break;
-
-
         }
     }
 
@@ -188,7 +157,7 @@ public class PublicActivity extends AppCompatActivity  implements View.OnClickLi
             switch (v.getId()) {
                 case R.id.window_pop_1:
                     imagePaths.clear();
-                    String filePath="/storage/emulated/0/Pictures/Screenshots/compress/";
+
                     PictureSelector.create((Activity) context)
                             .openGallery(PictureMimeType.ofImage())
                             .loadImageEngine(GlideEngine.createGlideEngine())
@@ -201,21 +170,22 @@ public class PublicActivity extends AppCompatActivity  implements View.OnClickLi
                             .selectionMode(PictureConfig.MULTIPLE)
                             .isZoomAnim(true)
                             .selectionMedia(selectList)
-                           // .enableCrop(true)
+                            // .enableCrop(true)
                             .compress(true)
-                            .withAspectRatio(9,16)
-                           // .compressSavePath(filePath)
+                            .withAspectRatio(9, 16)
+                            // .compressSavePath(filePath)
                             .circleDimmedLayer(false)
                             .minimumCompressSize(100)
                             .scaleEnabled(true)
 
 
-
                             .forResult(PictureConfig.CHOOSE_REQUEST);
-
-
-
                     break;
+                case R.id.window_pop_3:
+                    break;
+
+
+
             }
         }
     };
@@ -262,24 +232,10 @@ public class PublicActivity extends AppCompatActivity  implements View.OnClickLi
                         LocalMedia localMedia = selectList.get(i);
                         Log.d("test", "Path              " + localMedia.getPath());
 
-                            imagePaths.add(localMedia.getCompressPath());
-                            //imagePutPaths.add(localMedia.getPath());原图路径
+                        imagePaths.add(localMedia.getCompressPath());
+                        //imagePutPaths.add(localMedia.getPath());原图路径
 
                     }
-
-
-
-//
-//                    for (int i = 0; i < selectList.size(); i++) {
-//
-//                        LocalMedia localMedia = selectList.get(i);
-//                        Log.d("test", "Path              " + localMedia.getPath());
-//                        imagePaths.add(localMedia.getPath());
-//
-//                    }
-
-
- //                   String uri = imagePaths.get(0);
                     adapter.notifyDataSetChanged();
 
                     break;

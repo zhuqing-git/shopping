@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.zhuqing.shopping.db.User;
+import com.zhuqing.shopping.entity.Commodity;
+import com.zhuqing.shopping.entity.User;
 import com.zhuqing.shopping.util.HttpUtil;
 import com.zhuqing.shopping.util.LoginUtility;
 import com.zhuqing.shopping.util.ValueUtility;
@@ -20,7 +24,14 @@ import com.zhuqing.shopping.util.ValueUtility;
 import org.json.JSONException;
 import org.litepal.LitePal;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.Call;
@@ -39,10 +50,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     String TAG="LoginActivity";
+    String fileName;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
+
+
+
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -70,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_login_button:
-                String address = "http://192.168.43.28:8080/login";
+                String address = HttpUtil.prefix+"login";
                 RequestBody requestBody = new FormBody.Builder().add("phone", phoneText.getText().toString()).add("password", passwordText.getText().toString()).build();
                 Request request = new Request.Builder().url(address).post(requestBody).build();
 

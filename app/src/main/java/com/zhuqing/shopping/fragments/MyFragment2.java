@@ -21,6 +21,8 @@ import com.zhuqing.shopping.adapter.CommodityAdapter;
 import com.zhuqing.shopping.entity.Commodity;
 import com.zhuqing.shopping.util.CustomLinearLayoutManager;
 
+import org.litepal.LitePal;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -32,7 +34,7 @@ public class MyFragment2 extends Fragment {
     List<Integer> imageUrlData;
     List<String> contentData;
     int status=0;
-    private List<Integer> imageList=new ArrayList<>();
+    private List<String> imageList=new ArrayList<>();
 
     public MyFragment2(int status){
         this.status=status;
@@ -47,15 +49,12 @@ public class MyFragment2 extends Fragment {
 
     //region 初始化recycleView
     private void initFruits() {
-        imageList.add(R.drawable.d1);
-        imageList.add(R.drawable.a1);
+        imageList.add(String.valueOf(R.drawable.d1));
+        imageList.add(String.valueOf(R.drawable.a1));
         for (int i = 0; i < 20; i++) {
-            Commodity apple = new Commodity(1, "这里是内容", 20, 120,
-                    124, 3,  imageList,null);
+            Commodity apple = LitePal.findFirst(Commodity.class);
             fruitList.add(apple);
-            Commodity pear = new Commodity(1, "这里是内容", 20, 120,
-                    124, 3,  imageList,null);
-            fruitList.add(pear);
+
         }
     }
 
@@ -94,14 +93,14 @@ public class MyFragment2 extends Fragment {
             recyclerView.setLayoutManager(manager);
         }
 
-        CommodityAdapter adapter = new CommodityAdapter(fruitList,0);
+        CommodityAdapter adapter = new CommodityAdapter(fruitList,0,0);
         recyclerView.setAdapter(adapter);
 
         imageUrlData = new ArrayList<>();
         contentData = new ArrayList<>();
-        imageUrlData.add(R.drawable.d16);
-        imageUrlData.add(R.drawable.d16);
-        imageUrlData.add(R.drawable.d16);
+        imageUrlData.add(R.drawable.default_head);
+        imageUrlData.add(R.drawable.default_head);
+        imageUrlData.add(R.drawable.default_head);
         contentData.add("头像");
         contentData.add("头像");
         contentData.add("头像");
