@@ -20,11 +20,13 @@ import com.bumptech.glide.Glide;
 import com.zhuqing.shopping.MsgActivity;
 import com.zhuqing.shopping.R;
 import com.zhuqing.shopping.entity.Commodity;
+import com.zhuqing.shopping.item.CommodyActivity;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -37,14 +39,15 @@ public class CommodityAdapter extends RecyclerView.Adapter<CommodityAdapter.View
     Context context;
     private List<Commodity> mCommodityList;
   private int number;
- private ViewHolder ffff;
+
  int state;
 
 
 
 
    static   class ViewHolder extends RecyclerView.ViewHolder {
-        //View ffff;
+       public View commodityView;
+
 
         TextView content,money,praise,message,collection;
         Button edit,cancel;
@@ -56,12 +59,14 @@ public class CommodityAdapter extends RecyclerView.Adapter<CommodityAdapter.View
 
         public ViewHolder(@NonNull View itemView ,int number,int state) {
             super(itemView);
+            commodityView=itemView;
             this.number=number;
             if(number==0)
             {
                commodityName=itemView.findViewById(R.id.commodity_name_of_number0);
                commodityImage=itemView.findViewById(R.id.commodity_image_of_number0);
                money=itemView.findViewById(R.id.commodity_money_of_number0);
+               praise=itemView.findViewById(R.id.commodity_praise_of_number0);
             } if(number==1)
             {
                 commodityName = itemView.findViewById(R.id.item_topic_right_textview);
@@ -108,26 +113,44 @@ public class CommodityAdapter extends RecyclerView.Adapter<CommodityAdapter.View
 
 
         this.context=parent.getContext();
+        ViewHolder viewHolder = null;
+
 
         if(number==0)
         {
             View   view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_commodity_linear, parent, false);
 
-           return new ViewHolder(view,number,state);
+            viewHolder= new ViewHolder(view,number,state);
 
         } if (number==1)
         {
             View   view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_topic_right, parent, false);
-              return   new ViewHolder(view,number,state);
+            viewHolder=   new ViewHolder(view,number,state);
 
         }
         else if(number==3)
         {
             View  view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_commodity_view, parent, false);
-              return new   ViewHolder(view,number,state);
+            viewHolder= new   ViewHolder(view,number,state);
 
         }
-        return null;
+
+        ViewHolder finalViewHolder = viewHolder;
+        viewHolder.commodityView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position= finalViewHolder.getAdapterPosition();
+                Commodity commodity=mCommodityList.get(position);
+                Intent intent =new Intent(context, CommodyActivity.class);
+                intent.putExtra("commodity",commodity);
+               context.startActivity(intent);
+
+
+            }
+        });
+
+        return viewHolder;
+
    }
 
     @Override
@@ -139,9 +162,13 @@ public class CommodityAdapter extends RecyclerView.Adapter<CommodityAdapter.View
        {
 
          holder.money.setText(String.valueOf(commodity.getMoney()));
+           holder.praise.setText(String.valueOf(commodity.getPraise()));
 
             holder.commodityName.setText(commodity.getContent());
-           Glide.with(context).load(commodity.getImageList().get(0)).into(holder.commodityImage);
+            if (commodity.getImageList()!=null&&commodity.getImageList().size()>0)
+                Glide.with(context).load(commodity.getImageList().get(0)).into(holder.commodityImage);
+
+
 
 
 
@@ -154,19 +181,14 @@ public class CommodityAdapter extends RecyclerView.Adapter<CommodityAdapter.View
             holder.praise.setText(String.valueOf(commodity.getPraise()));
             holder.message.setText(String.valueOf(commodity.getMessage()));
             holder.collection.setText(String.valueOf(commodity.getCollection()));
-            Glide.with(context).load(commodity.getImageList().get(0)).into(holder.commodityImage);
+            if (commodity.getImageList()!=null&&commodity.getImageList().size()>0)
+                Glide.with(context).load(commodity.getImageList().get(0)).into(holder.commodityImage);
 
 
-
-            //Glide.with(context).load(commodity.getImageList().get(0)).into(holder.commodityImage);
-//            holder.commodityImage.setImageResource(commodity.getOneImage(0));
-//            holder.commodityView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Toast.makeText(v.getContext(),"hello",Toast.LENGTH_SHORT).show();
-//                }
-//            });
         }
+
+
+
 
 
     }

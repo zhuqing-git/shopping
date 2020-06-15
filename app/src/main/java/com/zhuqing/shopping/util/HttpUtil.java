@@ -1,11 +1,13 @@
 package com.zhuqing.shopping.util;
 
 import android.content.Context;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.zhuqing.shopping.entity.Comment;
 import com.zhuqing.shopping.entity.Commodity;
 
 import org.json.JSONException;
@@ -32,7 +34,15 @@ import okhttp3.Response;
 public class HttpUtil {
     public static String prefix="http://192.168.43.17:8080/";
     public static String addressOfPicture = "http://192.168.43.17:8080/static/images/";
+
     public static String addressOfGetCommody = "http://192.168.43.17:8080/get_commody/";
+    public static String addressOfGetSortCommody=prefix+"sort_commody/";
+    private static String addressOfSellCommody=prefix+"sell_commody/";
+    public  static String addressOfGetComment=prefix+"get_comment/";
+    public static String addressOfSpecialCommody="http://192.168.43.17:8080/get_special_commody";
+
+
+    public static String addressOfPublicCommody="http://192.168.43.17:8080/public_commodity";
 
 
     public static void SendOkHttpRequest(String address, Request request, okhttp3.Callback callback) {
@@ -46,11 +56,13 @@ public class HttpUtil {
     public static class GetUtil {
 
 
-        //获取commody
-        public static void GetCommody(List<Commodity>commodityList, int state) throws IOException {
+
+
+        //获取用户自己的commody
+        public static void GetCommody(List<Commodity>commodityList,int number, int state) throws IOException {
 
             commodityList.clear();
-            String address = addressOfGetCommody + ValueUtility.getUserId() + "/5/" + state;
+            String address = addressOfGetCommody + ValueUtility.getUserId() + "/"+number+"/" + state;
 
 
             Request request = new Request.Builder().url(address).build();
@@ -82,6 +94,170 @@ public class HttpUtil {
 
 
         }
+
+
+
+        //获取显示的commody
+        public static void GetCommodyShow(List<Commodity>commodityList,int number, int state) throws IOException {
+
+            commodityList.clear();
+            String address = addressOfGetCommody +number+"/" + state+"/";
+
+
+            Request request = new Request.Builder().url(address).build();
+
+
+            OkHttpClient client = new OkHttpClient();
+            Response response = client.newCall(request).execute();
+
+            String responseText = response.body().string();
+
+            Gson gson = new Gson();
+            List<Commodity> commodities = gson.fromJson(responseText, new TypeToken<List<Commodity>>() {
+            }.getType());
+
+            for (Commodity c : commodities) {
+                List<String> ll = new ArrayList<>();
+                String[] a = c.getImages().split("/");
+
+                for (int i = 0; i < a.length - 1; i++) {
+                    String uri = HttpUtil.addressOfPicture + c.getUserID() + "/" + a[0] + "_" + a[1 + i];
+                    ll.add(uri);
+                }
+                c.setImageList(ll);
+                commodityList.add(c);
+
+
+            }
+
+
+
+        }
+
+        //获取分类的commody---commodityList 列表  number数量  state商品状态  topic商品分类
+        public static void GetSortCommody(List<Commodity>commodityList,int number,int state,int topic,int fun) throws IOException {
+
+            commodityList.clear();
+            String address = addressOfGetSortCommody +number+"/" + state+"/"+topic+"/"+fun;
+
+
+            Request request = new Request.Builder().url(address).build();
+
+
+            OkHttpClient client = new OkHttpClient();
+            Response response = client.newCall(request).execute();
+
+            String responseText = response.body().string();
+
+            Gson gson = new Gson();
+            List<Commodity> commodities = gson.fromJson(responseText, new TypeToken<List<Commodity>>() {
+            }.getType());
+
+            for (Commodity c : commodities) {
+                List<String> ll = new ArrayList<>();
+                String[] a = c.getImages().split("/");
+
+                for (int i = 0; i < a.length - 1; i++) {
+                    String uri = HttpUtil.addressOfPicture + c.getUserID() + "/" + a[0] + "_" + a[1 + i];
+                    ll.add(uri);
+                }
+                c.setImageList(ll);
+                commodityList.add(c);
+            }
+
+
+
+        }
+
+        //获取comment
+        public static void GetComment(List<Comment>commentList,int commodyId) throws IOException{
+
+            commentList.clear();
+            String address = addressOfGetComment +commodyId;
+
+
+            Request request = new Request.Builder().url(address).build();
+
+
+            OkHttpClient client = new OkHttpClient();
+            Response response = client.newCall(request).execute();
+
+            String responseText = response.body().string();
+
+            Gson gson = new Gson();
+
+            List<Comment> comments = gson.fromJson(responseText, new TypeToken<List<Comment>>() {
+            }.getType());
+
+            for (Comment c : comments) {
+                commentList.add(c);
+            }
+
+
+
+
+        }
+
+        //得到轮播台的Commody
+        public static void GetSpecialCommody(List<Commodity> commodityList) throws IOException{
+            commodityList.clear();
+            String address =  HttpUtil.addressOfSpecialCommody;
+
+
+            Request request = new Request.Builder().url(address).build();
+
+
+            OkHttpClient client = new OkHttpClient();
+            Response response = client.newCall(request).execute();
+            String responseText = response.body().string();
+            Gson gson = new Gson();
+            List<Commodity> commodities = gson.fromJson(responseText, new TypeToken<List<Commodity>>() {
+            }.getType());
+
+            for (Commodity c : commodities) {
+                List<String> ll = new ArrayList<>();
+                String[] a = c.getImages().split("/");
+
+                for (int i = 0; i < a.length - 1; i++) {
+                    String uri = HttpUtil.addressOfPicture + c.getUserID() + "/" + a[0] + "_" + a[1 + i];
+                    ll.add(uri);
+                }
+                c.setImageList(ll);
+                commodityList.add(c);
+
+
+            }
+
+
+
+
+
+
+
+        }
+
+
+        public static void SellCommody(int commodyId) throws IOException, JSONException {
+
+            String address = addressOfSellCommody +commodyId+"/"+ ValueUtility.getUserId() ;
+
+
+            Request request = new Request.Builder().url(address).build();
+
+
+            OkHttpClient client = new OkHttpClient();
+            Response response = client.newCall(request).execute();
+
+            String responseText = response.body().string();
+
+
+
+
+
+
+
+
+        }
     }
 
 
@@ -91,7 +267,7 @@ public class HttpUtil {
 
                 String userId = String.valueOf(ValueUtility.getUserId());
 
-                String address = Config.addressOfPublicCommody;
+                String address = HttpUtil.addressOfPublicCommody;
                 MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
                 Date current = new Date();
@@ -111,7 +287,9 @@ public class HttpUtil {
                 client.newCall(request).enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
+                        Looper.prepare();
                         Toast.makeText(context, "发布失败", Toast.LENGTH_SHORT).show();
+                        Looper.loop();
                     }
 
                     @Override

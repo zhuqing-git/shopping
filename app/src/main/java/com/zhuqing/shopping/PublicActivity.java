@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -68,14 +69,14 @@ public class PublicActivity extends AppCompatActivity implements View.OnClickLis
 
     private Toolbar toolbar;
     private CircleImageView sortImageView;
-    private TextView topTextView, sortTextView;
+    private TextView topTextView, sortTextView,publicMoney;
     private ImageView sortFlagImageView, publicTest;
     private LinearLayout topLinearLayout;
     private List<LocalMedia> selectList;
     private GridView gridView;
     private List<String> imagePaths = new ArrayList<>();
     private List<String> imagePutPaths = new ArrayList<>();
-    private EditText editText,publicMoney;
+    private EditText editText;
     private Button popBtn, pubButton;
     private CustomPopWindow popWindow;
 
@@ -98,7 +99,7 @@ public class PublicActivity extends AppCompatActivity implements View.OnClickLis
         popBtn = findViewById(R.id.public_popwindow);
         pubButton = findViewById(R.id.public_tijiao);
         publicTest = findViewById(R.id.public_test);
-        publicMoney=findViewById(R.id.public_money);
+        publicMoney=findViewById(R.id.public_mon);
 
 
         popBtn.setOnClickListener(this);
@@ -116,6 +117,7 @@ public class PublicActivity extends AppCompatActivity implements View.OnClickLis
         adapter = new CustomGridAdapter(this, imagePaths);
         gridView.setAdapter(adapter);
 
+
     }
 
 
@@ -124,7 +126,7 @@ public class PublicActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()) {
             // 相册主题
             case R.id.public_popwindow:
-                popWindow = new CustomPopWindow(this, itemsOnClick);
+                popWindow = new CustomPopWindow(this, itemsOnClick,1);
                 popWindow.showAtLocation(v, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
                 popWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
                     @Override
@@ -147,16 +149,29 @@ public class PublicActivity extends AppCompatActivity implements View.OnClickLis
              if (result)
                  finish();
 
+            case R.id.public_setmoney:
+                popWindow = new CustomPopWindow(this, itemsOnClick,3);
+                popWindow.showAtLocation(v, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+                popWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        popWindow.backgroundAlpha(PublicActivity.this, 1f);
+                    }
+                });
+
+
                 break;
         }
     }
 
+
     private View.OnClickListener itemsOnClick = new View.OnClickListener() {
         public void onClick(View v) {
-            popWindow.dismiss();
+
             switch (v.getId()) {
                 case R.id.window_pop_1:
                     imagePaths.clear();
+                    popWindow.dismiss();
 
                     PictureSelector.create((Activity) context)
                             .openGallery(PictureMimeType.ofImage())
@@ -181,10 +196,148 @@ public class PublicActivity extends AppCompatActivity implements View.OnClickLis
 
                             .forResult(PictureConfig.CHOOSE_REQUEST);
                     break;
+                case R.id.window_pop_2:
+                    popWindow.dismiss();
+                    imagePaths.clear();
+
+                    PictureSelector.create((Activity) context)
+                            .openGallery(PictureMimeType.ofImage())
+                            .loadImageEngine(GlideEngine.createGlideEngine())
+                            .isCamera(true)
+                            .maxSelectNum(6)
+                            .theme(R.style.picture_default_style)
+                            .isReturnEmpty(true)
+                            .selectionMode(PictureConfig.SINGLE)
+                            .imageSpanCount(6)
+                            .selectionMode(PictureConfig.MULTIPLE)
+                            .isZoomAnim(true)
+                            .selectionMedia(selectList)
+                            // .enableCrop(true)
+                            .compress(true)
+                            .withAspectRatio(9, 16)
+                            // .compressSavePath(filePath)
+                            .circleDimmedLayer(false)
+                            .minimumCompressSize(100)
+                            .scaleEnabled(true)
+
+
+                            .forResult(PictureConfig.CHOOSE_REQUEST);
+                    break;
                 case R.id.window_pop_3:
+                    popWindow.dismiss();
+                    break;
+
+                case R.id.pop2_shuben_layout:
+                    popWindow.dismiss();
+                    topTextView.setVisibility(View.GONE);
+                    sortImageView.setVisibility(View.VISIBLE);
+                    sortTextView.setVisibility(View.VISIBLE);
+                   sortTextView.setText("书本");
+                   sortFlagImageView.setVisibility(View.VISIBLE);
+                    break;
+                case R.id.pop2_shouji_layout:
+                    popWindow.dismiss();
+                    topTextView.setVisibility(View.GONE);
+                    sortImageView.setVisibility(View.VISIBLE);
+                    sortTextView.setVisibility(View.VISIBLE);
+                    sortTextView.setText("手机");
+                    sortFlagImageView.setVisibility(View.VISIBLE);
+                    break;
+                case R.id.pop2_diannao_layout:
+                    popWindow.dismiss();
+                    topTextView.setVisibility(View.GONE);
+                    sortImageView.setVisibility(View.VISIBLE);
+                    sortTextView.setVisibility(View.VISIBLE);
+                    sortTextView.setText("电脑");
+                    sortFlagImageView.setVisibility(View.VISIBLE);
+                    break;
+                case R.id.pop2_shuma_layout:
+                    popWindow.dismiss();
+                    topTextView.setVisibility(View.GONE);
+                    sortImageView.setVisibility(View.VISIBLE);
+                    sortTextView.setVisibility(View.VISIBLE);
+                    sortTextView.setText("数码");
+                    sortFlagImageView.setVisibility(View.VISIBLE);
+                    break;
+                case R.id.pop2_meizhuang_layout:
+                    popWindow.dismiss();
+                    topTextView.setVisibility(View.GONE);
+                    sortImageView.setVisibility(View.VISIBLE);
+                    sortTextView.setVisibility(View.VISIBLE);
+                    sortTextView.setText("美妆");
+                    sortFlagImageView.setVisibility(View.VISIBLE);
+                    break;
+                case R.id.pop2_yundong_layout:
+                    popWindow.dismiss();
+                    topTextView.setVisibility(View.GONE);
+                    sortImageView.setVisibility(View.VISIBLE);
+                    sortTextView.setVisibility(View.VISIBLE);
+                    sortTextView.setText("运动");
+                    sortFlagImageView.setVisibility(View.VISIBLE);
+                    break;
+                case R.id.pop2_xihu_layout:
+                    popWindow.dismiss();
+                    topTextView.setVisibility(View.GONE);
+                    sortImageView.setVisibility(View.VISIBLE);
+                    sortTextView.setVisibility(View.VISIBLE);
+                    sortTextView.setText("洗护");
+                    sortFlagImageView.setVisibility(View.VISIBLE);
+                    break;
+                case R.id.pop2_yiwu_layout:
+                    popWindow.dismiss();
+                    topTextView.setVisibility(View.GONE);
+                    sortImageView.setVisibility(View.VISIBLE);
+                    sortTextView.setVisibility(View.VISIBLE);
+                    sortTextView.setText("衣物");
+                    sortFlagImageView.setVisibility(View.VISIBLE);
                     break;
 
 
+
+
+                case R.id.tv_NumberPopup_0:
+                    if (publicMoney.getText()!=null || Integer.parseInt(publicMoney.getText().toString())<0)
+                        publicMoney.setText( publicMoney.getText()+"0");
+                    break;
+                case R.id.tv_NumberPopup_1:
+                    publicMoney.setText( publicMoney.getText()+"1");
+                    break;
+                case R.id.tv_NumberPopup_2:
+                    publicMoney.setText( publicMoney.getText()+"2");
+                    break;
+                case R.id.tv_NumberPopup_3:
+                    publicMoney.setText( publicMoney.getText()+"3");
+                    break;
+                case R.id.tv_NumberPopup_4:
+                    publicMoney.setText( publicMoney.getText()+"4");
+                    break;
+                case R.id.tv_NumberPopup_5:
+                    publicMoney.setText( publicMoney.getText()+"5");
+                    break;
+                case R.id.tv_NumberPopup_6:
+                    publicMoney.setText( publicMoney.getText()+"6");
+                    break;
+                case R.id.tv_NumberPopup_7:
+                    publicMoney.setText( publicMoney.getText()+"7");
+                    break;
+                case R.id.tv_NumberPopup_8:
+                    publicMoney.setText( publicMoney.getText()+"8");
+                    break;
+                case R.id.tv_NumberPopup_9:
+                    publicMoney.setText( publicMoney.getText()+"9");
+                    break;
+                case R.id.iv_NumberPopup_Del:
+                  String string= publicMoney.getText().toString();
+
+                   publicMoney.setText(string.substring(0,string.length()-1));
+
+                    break;
+                case R.id.iv_NumberPopup_sure:
+                    popWindow.dismiss();
+
+                case R.id.window_pop_4:
+                   Toast.makeText(getApplicationContext(),"niaofsdfhsd",Toast.LENGTH_SHORT).show();
+                   break;
 
             }
         }
@@ -205,10 +358,18 @@ public class PublicActivity extends AppCompatActivity implements View.OnClickLis
     public void onClickPublic(View view) {
         switch (view.getId()) {
             case R.id.public_top_layout:
-                topTextView.setVisibility(View.GONE);
-                sortImageView.setVisibility(View.VISIBLE);
-                sortTextView.setVisibility(View.VISIBLE);
-                sortFlagImageView.setVisibility(View.VISIBLE);
+                popWindow = new CustomPopWindow(this, itemsOnClick,2);
+                popWindow.showAtLocation(view, Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+                popWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        popWindow.backgroundAlpha(PublicActivity.this, 1f);
+                    }
+                });
+
+
+                break;
+
         }
     }
 

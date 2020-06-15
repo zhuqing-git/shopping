@@ -45,23 +45,23 @@
                         <androidx.appcompat.widget.SearchView
                             android:id="@+id/seachview_1"
                             android:layout_width="0dp"
-                            android:layout_weight="6"
                             android:layout_height="wrap_content"
-
                             android:layout_margin="10dp"
 
+                            android:layout_weight="6"
+
                             android:background="@drawable/yuan"
-                            android:textColor="#fff"
-                            android:gravity="center"
                             android:focusable="false"
+                            android:gravity="center"
+                            android:textColor="#fff"
                             app:iconifiedByDefault="false"
                             app:queryHint="" />
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/sort_way"
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:paddingLeft="10dp"
 
                             android:scaleType="centerCrop"
@@ -72,118 +72,125 @@
                 </androidx.appcompat.widget.Toolbar>
 
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:orientation="horizontal">
 
-                    <LinearLayout
+                    <RadioGroup
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:id="@+id/sort_radioGroup"
 
-                        <RadioGroup
-                            android:layout_width="match_parent"
+                        >
+
+                        <RadioButton
+                            android:id="@+id/sort_zhonghe_btn"
+                            android:layout_width="0dp"
                             android:layout_height="32dp"
-                            android:orientation="horizontal"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_underlin"
 
-                            >
-                            <RadioButton
-                                android:id="@+id/sort_zhonghe_btn"
-                                android:button="@null"
-                                android:text="综合排序"
-                                android:background="@drawable/button_underlin"
-                                android:checked="true"
-
-                                android:textColor="#fff"
-                                android:gravity="center"
-
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="32dp" />
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:src="@drawable/d1"
-                                android:layout_gravity="bottom"
-                                android:layout_height="match_parent" />
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="match_parent"/>
-
-                            <RadioButton
-                                android:id="@+id/sort_dianji_btn"
-                                android:button="@null"
-                                android:text="价格"
-                                android:background="@drawable/button_underlin"
-                                android:textColor="#fff"
-
-                                android:gravity="center"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="32dp" />
-                            <ImageView
-
-                                android:layout_width="15dp"
-                                android:src="@drawable/d1"
-                                android:layout_gravity="bottom"
-                                android:layout_height="match_parent" />
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="match_parent"/>
-
-                            <RadioButton
-                                android:id="@+id/sort_guanzhu_btn"
-                                android:button="@null"
-                                android:text="点击"
-                                android:background="@drawable/button_underlin"
-                                android:textColor="#fff"
-
-
-                                android:gravity="center"
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="32dp" />
-
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="32dp"/>
-
-
-                           <RadioButton
-                            android:id="@+id/sort_liuyan_btn"
                             android:button="@null"
-                            android:text="粉丝"
-                               android:background="@drawable/button_underlin"
-                            android:textColor="#fff"
-                               android:gravity="center"
+                            android:checked="true"
 
-                               android:layout_width="0dp"
-                               android:layout_weight="1"
-                            android:layout_height="32dp" />
+                            android:gravity="center"
+                            android:text="综合排序"
+                            android:textColor="#fff" />
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="bottom"
+                            android:src="@drawable/d1" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <RadioButton
+                            android:id="@+id/sort_jiage_btn"
+                            android:layout_width="0dp"
+                            android:layout_height="32dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_underlin"
+
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="价格"
+                            android:textColor="#fff" />
+
+                        <ImageView
+
+                            android:layout_width="15dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="bottom"
+                            android:src="@drawable/d1" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <RadioButton
+                            android:id="@+id/sort_shoucang_btn"
+                            android:layout_width="0dp"
+                            android:layout_height="32dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_underlin"
 
 
-                        </RadioGroup>
+                            android:button="@null"
+                            android:gravity="center"
+                            android:text="收藏"
+                            android:textColor="#fff" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="32dp"
+                            android:layout_weight="1" />
 
 
-                    </LinearLayout>
+                        <RadioButton
+                            android:id="@+id/sort_xinyongfen_btn"
+                            android:layout_width="0dp"
+                            android:layout_height="32dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_underlin"
+                            android:button="@null"
+
+                            android:gravity="center"
+                            android:text="信用分"
+                            android:textColor="#fff" />
 
 
+                    </RadioGroup>
 
 
-
-
+                </LinearLayout>
 
 
             </com.google.android.material.appbar.AppBarLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/sort_recyclerView"
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/sort_swipeRefreshLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/sort_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            </androidx.recyclerview.widget.RecyclerView>
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
             <!--                android:background="?android:attr/windowBackground"-->
@@ -192,16 +199,7 @@
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
-
-
-
-
-
-
-
     </LinearLayout>
-
-
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

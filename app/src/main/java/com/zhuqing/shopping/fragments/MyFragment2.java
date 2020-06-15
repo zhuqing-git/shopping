@@ -2,6 +2,8 @@ package com.zhuqing.shopping.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +15,20 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.youth.banner.loader.ImageLoader;
 import com.zhuqing.shopping.R;
 import com.zhuqing.shopping.adapter.CommodityAdapter;
 import com.zhuqing.shopping.entity.Commodity;
+import com.zhuqing.shopping.util.Config;
 import com.zhuqing.shopping.util.CustomLinearLayoutManager;
+import com.zhuqing.shopping.util.HttpUtil;
 
 import org.litepal.LitePal;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -31,50 +37,51 @@ public class MyFragment2 extends Fragment {
 
 
 
-    List<Integer> imageUrlData;
-    List<String> contentData;
+
     int status=0;
-    private List<String> imageList=new ArrayList<>();
+    int topic;
 
-    public MyFragment2(int status){
+
+     List<Commodity> commodityList=new ArrayList<>();
+     CommodityAdapter adapter;
+  private SwipeRefreshLayout swipeRefreshLayout;
+
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    adapter.notifyDataSetChanged();
+                    swipeRefreshLayout.setRefreshing(false);
+
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    };
+
+    public MyFragment2(int status,int topic){
         this.status=status;
+        this.topic=topic;
     }
-    public MyFragment2(){}
+   // public MyFragment2(){}
 
 
 
-    private String[] data = {"apple", "pear"};
-    private List<Commodity> fruitList = new ArrayList<>();
 
 
-    //region 初始化recycleView
-    private void initFruits() {
-        imageList.add(String.valueOf(R.drawable.d1));
-        imageList.add(String.valueOf(R.drawable.a1));
-        for (int i = 0; i < 20; i++) {
-            Commodity apple = LitePal.findFirst(Commodity.class);
-            fruitList.add(apple);
 
-        }
-    }
 
-    private String getRandomLengthName(String apple) {
-        Random random = new Random();
-        int length = random.nextInt(20) + 1;
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            builder.append(apple);
-        }
-        return builder.toString();
-    }
 
-    //endregion
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_page2, container, false);
-        initFruits();
+        swipeRefreshLayout=view.findViewById(R.id.fragment_page2_swipe);
         RecyclerView recyclerView = view.findViewById(R.id.page2_recyclerView);
+
         if(status==0)
         {
             //网格视图
@@ -93,31 +100,49 @@ public class MyFragment2 extends Fragment {
             recyclerView.setLayoutManager(manager);
         }
 
-        CommodityAdapter adapter = new CommodityAdapter(fruitList,0,0);
+
+
+         adapter = new CommodityAdapter(commodityList,0,0);
+        refreshCommody();
         recyclerView.setAdapter(adapter);
 
-        imageUrlData = new ArrayList<>();
-        contentData = new ArrayList<>();
-        imageUrlData.add(R.drawable.default_head);
-        imageUrlData.add(R.drawable.default_head);
-        imageUrlData.add(R.drawable.default_head);
-        contentData.add("头像");
-        contentData.add("头像");
-        contentData.add("头像");
+
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshCommody();
+
+            }
+        });
+
+
 
         return view;
     }
 
 
-    private class Myloader extends ImageLoader {
+    private void refreshCommody() {
+        commodityList.clear();
 
-        @Override
-        public void displayImage(Context context, Object path, ImageView imageView) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    HttpUtil.GetUtil.GetSortCommody(commodityList,Config.getCommodyNumber,0,topic,0);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
 
-            Glide.with(context).load(path).into(imageView);
-
+                Message msg = new Message();
+                msg.what = 1;
+                handler.sendMessage(msg);
+            }
         }
+        ).start();
+
     }
 }
 

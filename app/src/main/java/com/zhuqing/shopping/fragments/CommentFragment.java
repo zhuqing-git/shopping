@@ -28,7 +28,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhuqing.shopping.LoginActivity;
 import com.zhuqing.shopping.R;
+import com.zhuqing.shopping.adapter.CommentAdapter;
 import com.zhuqing.shopping.adapter.CommodityAdapter;
+import com.zhuqing.shopping.entity.Comment;
 import com.zhuqing.shopping.entity.Commodity;
 import com.zhuqing.shopping.util.AsyncTaskUtil;
 import com.zhuqing.shopping.util.Config;
@@ -56,14 +58,14 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class CommodityFragment extends Fragment {
-    RecyclerView recyclerView;
+public class CommentFragment extends Fragment {
 
-    private int flag;
-    CommodityAdapter adapter;
+    RecyclerView recyclerView;
+    private int commodyId;
+    CommentAdapter adapter;
     SwipeRefreshLayout swipeRefreshLayout;
-    List<Commodity> commodityList = new ArrayList<>();
-    int state;
+    List<Comment> commentList = new ArrayList<>();
+
 
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -71,6 +73,7 @@ public class CommodityFragment extends Fragment {
                 case 1:
                     adapter.notifyDataSetChanged();
                     swipeRefreshLayout.setRefreshing(false);
+
 
                     break;
                 default:
@@ -83,9 +86,9 @@ public class CommodityFragment extends Fragment {
 
     private String TAG = "CommodityFragment";
 
-    public CommodityFragment(int flag, int state) {
-        this.flag = flag;
-        this.state = state;
+    public CommentFragment(int commodyId) {
+        this.commodyId = commodyId;
+
     }
 
     @Nullable
@@ -93,38 +96,38 @@ public class CommodityFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_page2, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.page2_recyclerView);
-
         swipeRefreshLayout = view.findViewById(R.id.fragment_page2_swipe);
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshCommody();
+                refreshComment();
 
             }
         });
-        refreshCommody();
+        refreshComment();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
 
-        adapter = new CommodityAdapter(commodityList, flag, state);
+        adapter = new CommentAdapter(commentList);
+
         recyclerView.setAdapter(adapter);
 
         return view;
     }
 
-    private void refreshCommody() {
-        commodityList.clear();
+    private void refreshComment() {
+        commentList.clear();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
 
                 try {
-                HttpUtil.GetUtil.GetCommody(commodityList, Config.getCommodyNumber,state) ;
+                    HttpUtil.GetUtil.GetComment(commentList,commodyId);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

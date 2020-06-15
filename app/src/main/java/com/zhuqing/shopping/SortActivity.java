@@ -7,70 +7,78 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.zhuqing.shopping.adapter.CommodityAdapter;
 import com.zhuqing.shopping.entity.Commodity;
+import com.zhuqing.shopping.util.Config;
+import com.zhuqing.shopping.util.HttpUtil;
+import com.zhuqing.shopping.util.WindowUtil;
 
 import org.litepal.LitePal;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+
+
 public class SortActivity extends AppCompatActivity implements View.OnClickListener {
 
-    List<Integer> imageUrlData;
-    List<String> contentData;
     DrawerLayout drawerLayout;
     CircleImageView sortWay;
     Toolbar toolbar;
     RecyclerView recyclerView;
     CommodityAdapter adapter;
-    int goodsType = 0;
+    SwipeRefreshLayout swipeRefreshLayout;
+    RadioGroup radioGroup;
+    int topic;
 
 
-    private String[] data = {"apple", "pear"};
-    private List<Commodity> fruitList = new ArrayList<>();
-    private List<String> imageList=new ArrayList<>();
 
-    //region 初始化recycleView
-    private void initFruits() {
-        imageList.add(String.valueOf(R.drawable.a1));
-        for (int i = 0; i < 20; i++) {
-            Commodity apple = LitePal.findFirst(Commodity.class);
-            fruitList.add(apple);
+    private List<Commodity> commodityList = new ArrayList<>();
+    private int goodsType=0;
+
+    private Handler handler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    adapter.notifyDataSetChanged();
+                    swipeRefreshLayout.setRefreshing(false);
+
+
+                    break;
+                default:
+                    break;
+            }
 
         }
-    }
+    };
 
-    private String getRandomLengthName(String apple) {
-        Random random = new Random();
-        int length = random.nextInt(20) + 1;
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            builder.append(apple);
-        }
-        return builder.toString();
-    }
+
     //endregion
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sort);
-        initFruits();
         recyclerView = findViewById(R.id.sort_recyclerView);
         drawerLayout = (DrawerLayout) findViewById(R.id.sort_drawer_layout);
         sortWay = (CircleImageView) findViewById(R.id.sort_way);
-        adapter = new CommodityAdapter(fruitList,0,0);
-
+        swipeRefreshLayout=findViewById(R.id.sort_swipeRefreshLayout);
+        radioGroup=findViewById(R.id.sort_radioGroup);
         toolbar = (Toolbar) findViewById(R.id.sort_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -79,22 +87,74 @@ public class SortActivity extends AppCompatActivity implements View.OnClickListe
             //actionBar.setHomeAsUpIndicator(R.drawable.d1);//设置背景图片
         }
 
+        WindowUtil.setStatusBar(this);
+
+        String sort=getIntent().getStringExtra("sort");
+
+       topic= Config.GetSortNumber(sort);
+
 
         sortWay.setOnClickListener(this);
 
-        imageUrlData = new ArrayList<>();
-        contentData = new ArrayList<>();
-        imageUrlData.add(R.drawable.default_head);
-        imageUrlData.add(R.drawable.default_head);
-        imageUrlData.add(R.drawable.default_head);
-        contentData.add("头像");
-        contentData.add("头像");
-        contentData.add("头像");
+        adapter = new CommodityAdapter(commodityList,0,0);
 
 
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        refreshCommody(0);
         recyclerView.setAdapter(adapter);
 
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshCommody(0);
+            }
+        });
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId==R.id.sort_jiage_btn)
+                {
+                   refreshCommody(1);
+                }
+                if (checkedId==R.id.sort_zhonghe_btn)
+                {
+                    refreshCommody(0);
+                }
+                if (checkedId==R.id.sort_shoucang_btn)
+                {
+                    refreshCommody(2);
+                }
+                if (checkedId==R.id.sort_xinyongfen_btn)
+                {
+                    refreshCommody(3);
+                }
+            }
+        });
+    }
+
+    //flag(综合，价格，收藏，信用
+    private void refreshCommody(int flag) {
+
+        commodityList.clear();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+
+                        HttpUtil.GetUtil.GetSortCommody(commodityList,Config.getCommodyNumber,0,topic,flag);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Message msg = new Message();
+                msg.what = 1;
+                handler.sendMessage(msg);
+            }
+        }).start();
 
     }
 
@@ -137,6 +197,8 @@ public class SortActivity extends AppCompatActivity implements View.OnClickListe
         }
         return true;
     }
+
+
 
 
 }

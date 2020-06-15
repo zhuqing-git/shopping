@@ -28,6 +28,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.zhuqing.shopping.fragments.CommunityFragment;
+import com.zhuqing.shopping.fragments.FansFragment;
+import com.zhuqing.shopping.fragments.MessageFragment;
 import com.zhuqing.shopping.fragments.MyFragment1;
 import com.zhuqing.shopping.fragments.MyFragment2;
 import com.zhuqing.shopping.fragments.MyFragment3;
@@ -112,7 +114,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //
 //        }
 
-        Log.d("test", String.valueOf(Build.VERSION.SDK_INT));
+//    searchView1.setOnSearchClickListener(new View.OnClickListener(){
+//
+//        @Override
+//        public void onClick(View v) {
+//            Toast.makeText(MainActivity.this,"nihsi",Toast.LENGTH_SHORT).show();
+//        }
+//    });
 
         imagePersiion.setOnClickListener(this);
         navImagePerson.setOnClickListener(this);
@@ -121,7 +129,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 //        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-        searchView1.setFocusable(false);
+
+//        searchView1.setOnSearchClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(v.getContext(),"你好",Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
 
 
 
@@ -205,6 +220,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                     });
 
 
+
+
                         break;
                 }
 
@@ -216,18 +233,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //region 添加碎片
         fragments1 = new ArrayList<>();
         fragments1.add(new MyFragment1());
-//        fragments1.add(new MyFragment2(0));
-//        fragments1.add(new MyFragment2(0));
-//        fragments1.add(new MyFragment2(0));
-//        fragments1.add(new MyFragment2(0));
-//        fragments1.add(new MyFragment2(0));
-//        fragments1.add(new MyFragment2(0));
-//        fragments1.add(new MyFragment2(0));
-//        fragments1.add(new MyFragment2(0));
+        fragments1.add(new MyFragment2(0,1));
+        fragments1.add(new MyFragment2(0,2));
+        fragments1.add(new MyFragment2(0,3));
+        fragments1.add(new MyFragment2(0,4));
+        fragments1.add(new MyFragment2(0,5));
+        fragments1.add(new MyFragment2(0,6));
+        fragments1.add(new MyFragment2(0,7));
+        fragments1.add(new MyFragment2(0,8));
 
         fragments2 = new ArrayList<>();
         fragments2.add(new MyFragment3());
-//        fragments2.add(new MyFragment2(2));
+        fragments2.add(new MessageFragment());
         fragments2.add(new CommunityFragment());
         //endregion
 
@@ -410,9 +427,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.shuben_layout:
-                Toast.makeText(this, "书本", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, SortActivity.class);
-                startActivity(intent);
+                Intent intent5 = new Intent(MainActivity.this, SortActivity.class);
+                intent5.putExtra("sort","书本");
+                startActivity(intent5);
+                break;
+            case R.id.shouji_layout:
+                Intent intent6 = new Intent(MainActivity.this, SortActivity.class);
+                intent6.putExtra("sort","手机");
+                startActivity(intent6);
+                break;
+            case R.id.diannao_layout:
+                Intent intent7 = new Intent(MainActivity.this, SortActivity.class);
+                intent7.putExtra("sort","电脑");
+                startActivity(intent7);
+                break;
+            case R.id.shuma_layout:
+                Intent intent8 = new Intent(MainActivity.this, SortActivity.class);
+                intent8.putExtra("sort","数码");
+                startActivity(intent8);
+                break;
+            case R.id.meizhuang_layout:
+                Intent intent9 = new Intent(MainActivity.this, SortActivity.class);
+                intent9.putExtra("sort","美妆");
+                startActivity(intent9);
+                break;
+            case R.id.yundong_layout:
+                Intent intent10 = new Intent(MainActivity.this, SortActivity.class);
+                intent10.putExtra("sort","运动");
+                startActivity(intent10);
+                break;
+            case R.id.xihu_layout:
+                Intent intent11 = new Intent(MainActivity.this, SortActivity.class);
+                intent11.putExtra("sort","洗护");
+                startActivity(intent11);
+                break;
+            case R.id.yiwu_layout:
+                Intent intent12 = new Intent(MainActivity.this, SortActivity.class);
+                intent12.putExtra("sort","衣物");
+                startActivity(intent12);
                 break;
             default:
                 break;

@@ -178,9 +178,12 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:orientation="horizontal"
+                android:onClick="onClick"
+                android:id="@+id/public_setmoney"
                 android:background="@color/colorWhite"
                 >
                 <TextView
@@ -189,9 +192,10 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="bottom"
                     android:gravity="bottom"
+                    android:textSize="18sp"
                     android:text="价格："/>
 
-                <EditText
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="bottom"
@@ -199,9 +203,10 @@
                     android:background="@color/colorWhite"
                     android:focusableInTouchMode="true"
                     android:cursorVisible="true"
+                    android:textSize="24sp"
                     android:textCursorDrawable="@null"
                     android:gravity="bottom|start"
-                    android:id="@+id/public_money"
+                    android:id="@+id/public_mon"
                     />
             </LinearLayout>
             <LinearLayout

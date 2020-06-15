@@ -13,15 +13,18 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.zhuqing.shopping.R;
+import com.zhuqing.shopping.UserActivity;
 import com.zhuqing.shopping.fragments.FansFragment;
 import com.zhuqing.shopping.util.AppBarStateChangeListener;
 
@@ -123,12 +126,25 @@ public class DynamicActivity extends AppCompatActivity implements View.OnClickLi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-//                Toast.makeText(this,"backup",Toast.LENGTH_SHORT).show();
                 finish();
                 break;
+            case R.id.dynamic_menu_person:
+                Intent intent =new Intent(this,UserActivity.class);
+                startActivity(intent);
+                break;
+
         }
         return true;
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar,menu);
+        return true;
+    }
+
+
+
 
     @Override
     public void onClick(View v) {
@@ -164,6 +180,8 @@ public class DynamicActivity extends AppCompatActivity implements View.OnClickLi
             return fansTitle[position];
 
         }
+
     }
+
     //endregion
 }

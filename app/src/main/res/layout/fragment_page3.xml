@@ -43,6 +43,8 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:onClick="onClickLinearLayout"
+                android:id="@+id/shouji_layout"
                 >
                 <ImageView
                     android:layout_width="match_parent"
@@ -54,7 +56,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:textSize="14sp"
-                    android:text="书本"
+                    android:text="手机"
                     android:gravity="center"/>
             </LinearLayout>
             <LinearLayout
@@ -62,6 +64,8 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:onClick="onClickLinearLayout"
+                android:id="@+id/diannao_layout"
                 >
                 <ImageView
                     android:layout_width="match_parent"
@@ -73,7 +77,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:textSize="14sp"
-                    android:text="书本"
+                    android:text="电脑"
                     android:gravity="center"/>
             </LinearLayout>
             <LinearLayout
@@ -81,6 +85,8 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:onClick="onClickLinearLayout"
+                android:id="@+id/shuma_layout"
                 >
                 <ImageView
                     android:layout_width="match_parent"
@@ -92,7 +98,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:textSize="14sp"
-                    android:text="书本"
+                    android:text="数码"
                     android:gravity="center"/>
             </LinearLayout>
         </LinearLayout>
@@ -104,6 +110,8 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:onClick="onClickLinearLayout"
+                android:id="@+id/meizhuang_layout"
                 >
                 <ImageView
                     android:layout_width="match_parent"
@@ -115,7 +123,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:textSize="14sp"
-                    android:text="书本"
+                    android:text="美妆"
                     android:gravity="center"/>
             </LinearLayout>
             <LinearLayout
@@ -123,6 +131,8 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:onClick="onClickLinearLayout"
+                android:id="@+id/yundong_layout"
                 >
                 <ImageView
                     android:layout_width="match_parent"
@@ -134,7 +144,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:textSize="14sp"
-                    android:text="书本"
+                    android:text="运动"
                     android:gravity="center"/>
             </LinearLayout>
             <LinearLayout
@@ -142,6 +152,8 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:onClick="onClickLinearLayout"
+                android:id="@+id/xihu_layout"
                 >
                 <ImageView
                     android:layout_width="match_parent"
@@ -153,7 +165,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:textSize="14sp"
-                    android:text="书本"
+                    android:text="洗护"
                     android:gravity="center"/>
             </LinearLayout>
             <LinearLayout
@@ -161,19 +173,22 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:onClick="onClickLinearLayout"
+                android:id="@+id/yiwu_layout"
                 >
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="3"
                     android:src="@drawable/default_head"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:textSize="14sp"
-                    android:text="书本"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:text="衣物"
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
         <LinearLayout

@@ -2,6 +2,7 @@ package com.zhuqing.shopping.adapter;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,8 @@ import java.util.List;
 import static org.litepal.LitePalApplication.getContext;
 
 public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> {
-    private List<Commodity> mTopicList;
+    private List<String> topicList;
+    private List<String> imageList;
     private List<TopicLeft> mTopicLeftList;
 
 
@@ -53,9 +55,9 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
 
 
 
-    public TopicAdapter(List<Commodity> topicList){
-            mTopicList=topicList;
-
+    public TopicAdapter(List<String> topicList,List<String>imageList){
+            this.topicList=topicList;
+            this.imageList=imageList;
     }
 
 
@@ -76,20 +78,19 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull TopicAdapter.ViewHolder holder, int position) {
 
-        Commodity commodity = mTopicList.get(position);
-        FileInputStream inputStream= null;
-        Glide.with(getContext()).load(commodity.getImageList().get(0)).into(holder.commodityImage);
-        holder.commodityName.setText(commodity.getContent());
-
-
-
+        String string=topicList.get(position);
+        holder.commodityImage.setImageResource(Integer.parseInt(imageList.get(position)));
+        holder.commodityName.setText(string);
+       // if (commodity.getImageList()!=null&&commodity.getImageList().size()>0)
+           // Glide.with(getContext()).load(commodity.getImageList().get(0)).into(holder.commodityImage);
+        //holder.commodityName.setText(commodity.getContent());
 
     }
 
     @Override
     public int getItemCount() {
 
-        return mTopicList.size();}
+        return topicList.size();}
 
 
 

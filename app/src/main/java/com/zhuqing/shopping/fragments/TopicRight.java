@@ -40,9 +40,9 @@ public class TopicRight extends Fragment {
     @Nullable
     @Override
     public  View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-       View view =inflater.inflate(R.layout.fragment_topic_right,container,false);
+       View view =inflater.inflate(R.layout.fragment_page2,container,false);
 
-       recyclerView=(RecyclerView) view.findViewById(R.id.fragment_topic_right_recyclerview);
+       recyclerView=(RecyclerView) view.findViewById(R.id.page2_recyclerView);
         LinearLayoutManager manager=new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(manager);
         initFruits();

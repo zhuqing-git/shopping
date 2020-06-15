@@ -15,10 +15,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".item.CommodyActivity" android:label=""></activity>
+        <activity android:name=".UserActivity" android:label="" />
         <activity android:name=".SearchActivity">
             <intent-filter>
-                <action android:name="com.zhuqing.shopping.SEARCH"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="com.zhuqing.shopping.SEARCH" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".PublicActivity" />

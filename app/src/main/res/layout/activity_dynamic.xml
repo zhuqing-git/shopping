@@ -4,110 +4,55 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/dynamic_coordinator_layout"
-    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/dynamic_appBarLayout"
-        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
-        android:layout_height="250dp">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            app:toolbarId="@id/dynamic_toolbar"
-
-
-
-           app:expandedTitleTextAppearance="@style/UserpageUserNameExpandeleStyle"
-app:expandedTitleMarginBottom="10dp"
-            app:expandedTitleMarginStart="110dp"
-
+            android:fitsSystemWindows="true"
 
 
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:contentScrim="@color/colorPrimary"
+            app:expandedTitleMarginBottom="10dp"
+
+
+            app:expandedTitleMarginStart="110dp"
+            app:expandedTitleTextAppearance="@style/UserpageUserNameExpandeleStyle"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:statusBarScrim="@color/colorPrimary"
-            android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:toolbarId="@id/dynamic_toolbar">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:scaleType="centerCrop"
                 android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
                 android:src="@drawable/login"
                 app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.3"/>
-
-
+                app:layout_collapseParallaxMultiplier="0.3" />
 
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/dynamic_toolbar"
 
-app:title="朱庆"
-
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                app:layout_collapseMode="pin">
 
+                android:layout_height="50dp"
+                app:layout_collapseMode="pin"
+                app:title="朱庆">
 
 
             </androidx.appcompat.widget.Toolbar>
-
-<!--            <ImageView-->
-<!--                android:id="@+id/zuobiao"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_marginTop="220dp"-->
-<!--                android:layout_height="match_parent"/>-->
-<!--            <TextView-->
-<!--                android:id="@+id/dynamic_username"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="bottom"-->
-<!--                android:layout_marginBottom="20dp"-->
-<!--                android:text="朱庆"-->
-<!--                android:textSize="16sp"-->
-<!--                android:textColor="@color/colorWhite"-->
-
-<!--                android:layout_marginLeft="20dp"-->
-<!--                />-->
-<!--            <LinearLayout-->
-<!--                android:id="@+id/dynamic_linearlayout"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="bottom"-->
-<!--                >-->
-
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="金币:"-->
-<!--                    android:textColor="@color/colorWhite"-->
-<!--                    android:layout_gravity="bottom"-->
-<!--                    android:textSize="16sp"-->
-<!--                    android:layout_marginLeft="20dp"-->
-<!--                    />-->
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="100"-->
-<!--                    android:textColor="@color/colorWhite"-->
-<!--                    android:layout_gravity="bottom"-->
-<!--                    android:textSize="16sp"-->
-<!--                    android:layout_marginLeft="5dp"-->
-<!--                    />-->
-
-<!--            </LinearLayout>-->
-
-
-
 
 
 
@@ -115,22 +60,20 @@ app:title="朱庆"
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
 
-
-
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
         android:orientation="horizontal"
         app:layout_anchor="@id/dynamic_viewpager"
-        android:layout_gravity="top"
-        app:layout_anchorGravity="top"
-        android:layout_height="wrap_content">
+        app:layout_anchorGravity="top">
+
         <ImageView
             android:layout_width="40dp"
             android:layout_height="match_parent"
-            android:background="@color/colorWhite"/>
+            android:background="@color/colorWhite" />
 
 
         <com.google.android.material.tabs.TabLayout
@@ -138,7 +81,6 @@ app:title="朱庆"
             android:id="@+id/dynamic_tablayout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-
 
 
             android:background="@color/colorWhite"
@@ -152,37 +94,31 @@ app:title="朱庆"
     </LinearLayout>
 
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/dynamic_image_person"
         android:layout_width="100dp"
         android:layout_height="100dp"
 
 
-        app:fabSize="normal"
-
-        app:maxImageSize="96dp"
-        android:scaleType="center"
-        android:scrollbarFadeDuration="@android:integer/config_longAnimTime"
-
-        android:src="@drawable/d222"
         android:backgroundTint="@color/colorWhite"
 
+        android:scaleType="center"
+        android:scrollbarFadeDuration="@android:integer/config_longAnimTime"
+        android:src="@drawable/d222"
 
-
+        app:fabSize="normal"
         app:layout_anchor="@id/dynamic_appBarLayout"
-        app:layout_anchorGravity="bottom|start" />
+
+
+        app:layout_anchorGravity="bottom|start"
+        app:maxImageSize="96dp" />
+
     <androidx.viewpager.widget.ViewPager
-
-
-android:layout_marginTop="50dp"
         android:id="@+id/dynamic_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

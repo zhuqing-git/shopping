@@ -15,6 +15,7 @@ import com.zhuqing.shopping.R;
 import com.zhuqing.shopping.adapter.TieziAdapter;
 import com.zhuqing.shopping.adapter.TopicAdapter;
 import com.zhuqing.shopping.entity.Commodity;
+import com.zhuqing.shopping.entity.FansName;
 import com.zhuqing.shopping.entity.Tiezi;
 
 import org.litepal.LitePal;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommunityFragmentPage1 extends Fragment {
-    private List<Commodity> topicList=new ArrayList<>();
+    private List<String> topicList=new ArrayList<>();
     private List<Tiezi> tieziList=new ArrayList<>();
     private List<String> imageList= new ArrayList<>();
 
@@ -44,12 +45,15 @@ public class CommunityFragmentPage1 extends Fragment {
 
 
     private void initTopic() {
-
         imageList.add(String.valueOf(R.drawable.a1));
         imageList.add(String.valueOf(R.drawable.d1));
-        for (int i = 0; i < 20; i++) {
-            Commodity apple = LitePal.findFirst(Commodity.class);
-            topicList.add(apple);
+        for (int i = 0; i < 4; i++) {
+
+            imageList.add(String.valueOf(R.drawable.a1));
+            imageList.add(String.valueOf(R.drawable.d1));
+            topicList.add("第一");
+            topicList.add("第二");
+
         }
     }
 
@@ -75,7 +79,7 @@ public class CommunityFragmentPage1 extends Fragment {
         initTopic();
         initTiezi();
 
-        TopicAdapter adapter=new TopicAdapter(topicList);
+        TopicAdapter adapter=new TopicAdapter(topicList,imageList);
         recyclerView1.setAdapter(adapter);
 
         TieziAdapter tieziAdapter=new TieziAdapter(tieziList);
