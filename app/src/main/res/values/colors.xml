@@ -6,4 +6,7 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGray">#e0e0e0</color>
+    <color name="colorDeepRed">#d50000</color>
+    <color name="colorMidRed">#c62828</color>
+    <color name="colorLowRed">#e57373</color>
 </resources>

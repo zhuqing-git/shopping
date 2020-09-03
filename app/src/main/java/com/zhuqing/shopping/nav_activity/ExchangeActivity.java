@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.google.android.material.tabs.TabLayout;
 import com.zhuqing.shopping.R;
 import com.zhuqing.shopping.fragments.CommodityFragment;
+//import com.zhuqing.shopping.fragments.TieziFragment;
 import com.zhuqing.shopping.fragments.TieziFragment;
 import com.zhuqing.shopping.util.WindowUtil;
 
@@ -28,6 +29,10 @@ import com.zhuqing.shopping.util.WindowUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ *
+ */
 public class ExchangeActivity extends AppCompatActivity implements View.OnClickListener {
 
     TabLayout tabLayout;

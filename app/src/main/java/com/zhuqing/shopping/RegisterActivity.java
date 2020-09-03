@@ -64,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
             case R.id.regist_send:
                 //region 内容
-                String address = "http://192.168.43.28:8080/register";
+                String address = "http://192.168.43.17:8080/register";
                 RequestBody requestBody = new FormBody.Builder().add("phone", registerPhone.getText().toString()).add("password", registerPassword.getText().toString()).build();
                 Request request = new Request.Builder().url(address).post(requestBody).build();
                 HttpUtil.SendOkHttpRequest(address, request, new Callback() {

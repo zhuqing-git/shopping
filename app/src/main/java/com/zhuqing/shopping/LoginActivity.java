@@ -56,13 +56,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-
-
-
-
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         phoneText = (EditText) findViewById(R.id.login_phone);
@@ -89,7 +82,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_login_button:
-                String address = HttpUtil.prefix+"login";
+                Toast.makeText(this,"点击了登录",Toast.LENGTH_SHORT).show();
+                String address = "http://192.168.43.17:8080/login";
                 RequestBody requestBody = new FormBody.Builder().add("phone", phoneText.getText().toString()).add("password", passwordText.getText().toString()).build();
                 Request request = new Request.Builder().url(address).post(requestBody).build();
 

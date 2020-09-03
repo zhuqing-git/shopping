@@ -8,7 +8,7 @@
 
 <com.google.android.material.tabs.TabLayout
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="40dp"
     app:tabGravity="center"
     app:tabIndicatorColor="@color/colorPrimary"
     app:tabIndicatorFullWidth="false"

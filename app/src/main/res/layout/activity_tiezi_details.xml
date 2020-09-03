@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".item.TieziDetailsActivity">
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       >
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:id="@+id/tieziDetail_appbar"
+            android:layout_height="wrap_content"
+            >
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/tieziDetail_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:contentInsetStart="0dp"
+
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+<!--<View-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"/>-->
+
+                    <ImageView
+                        android:id="@+id/tieziDetail_imageview_rightTop"
+                        android:layout_width="25dp"
+                        android:layout_gravity="right|center_vertical"
+                        android:layout_height="25dp"
+android:layout_marginRight="10dp"
+                        android:background="@drawable/points" />
+
+
+                </FrameLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <LinearLayout
+
+           app:layout_anchor="@id/tieziDetail_appbar"
+            app:layout_anchorGravity="bottom"
+            android:layout_gravity="bottom"
+            android:id="@+id/tieziDetail_shenglunde"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:orientation="vertical">
+
+
+
+
+                <TextView
+                    android:id="@+id/tieziDetail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"/>
+
+
+
+
+
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tieziDetail_content"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="normal"
+                    android:textSize="16sp"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="10dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_gravity="left"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:scaleType="centerInside"
+                            android:id="@+id/tieziDetail_image_1"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"/>
+                        <ImageView
+                            android:layout_gravity="left"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:scaleType="centerInside"
+                            android:id="@+id/tieziDetail_image_2"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"/>
+                        <ImageView
+                            android:layout_gravity="left"
+                            android:scaleType="centerInside"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tieziDetail_image_3"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"/>
+                        <ImageView
+                            android:layout_gravity="left"
+                            android:scaleType="centerInside"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tieziDetail_image_4"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:id="@+id/tieziDetail_image_linearlayout"
+                            android:visibility="gone">
+
+                            <ImageView
+                                android:layout_gravity="left"
+                                android:scaleType="fitXY"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/tieziDetail_image_5"/>
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"/>
+                            <ImageView
+                                android:layout_gravity="left"
+                                android:scaleType="fitXY"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/tieziDetail_image_6"/>
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <!--                android:background="?android:attr/windowBackground"-->
+
+
+
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:layout_marginTop="2dp"
+        android:id="@+id/tieziDetail_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_marginBottom="10dp"
+        />
+
+
+</LinearLayout>

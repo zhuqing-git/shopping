@@ -35,7 +35,7 @@ public class CommunityFragment extends Fragment {
 
 
 
-    String[] topic = {"帖子","话题"};
+    String[] topic = {"热点","推荐"};
 
 
     @Nullable
@@ -52,8 +52,8 @@ public class CommunityFragment extends Fragment {
 //        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 //
         fragments=new  ArrayList<Fragment>();
-        fragments.add(new CommunityFragmentPage1());
-        fragments.add(new CommunityFragmentPage2());
+        fragments.add(new FirePointFragment());
+        fragments.add(new RecommendFragment());
 //        fragments.add(new CommunityFragmentPage1());
 //        fragments.add(new CommunityFragmentPage2());
 //        fragmentTransaction.add(R.id.fragment_bottom_frame,fragments.get(0));

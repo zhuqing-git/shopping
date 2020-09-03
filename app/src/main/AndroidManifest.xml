@@ -10,17 +10,21 @@
     <application
         android:name="org.litepal.LitePalApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_config"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".item.CommodyActivity" android:label=""></activity>
-        <activity android:name=".UserActivity" android:label="" />
+        <activity android:name=".item.TieziDetailsActivity"></activity>
+        <activity
+            android:name=".item.CommodyActivity"
+            android:label="" />
+        <activity
+            android:name=".UserActivity"
+            android:label="" />
         <activity android:name=".SearchActivity">
             <intent-filter>
                 <action android:name="com.zhuqing.shopping.SEARCH" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -43,7 +47,6 @@
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

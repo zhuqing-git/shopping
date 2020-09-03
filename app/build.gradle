@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+//    compileSdkVersion 28
     compileSdkVersion 28
     buildToolsVersion "29.0.2"
     defaultConfig {
@@ -19,9 +20,17 @@ android {
 
     allprojects {
         repositories {
-            jcenter()
-            maven { url 'https://jitpack.io' }
-            maven { url 'https://maven.google.com' }
+         //   jcenter()
+        //    jcenter(){url 'http://jcenter.bintray.com/'}
+
+          // maven { url 'https://jitpack.io' }
+          // maven { url 'https://maven.google.com' }
+
+            maven{url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+            //jcenter()
+            google()
+
+          //  maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         }
     }
 
@@ -57,7 +66,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.7'
     implementation 'de.hdodenhof:circleimageview:3.1.0'//边缘高亮园图片
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.4.6'//图片网格化
 
+    //implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.2'//
+
+  //  implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8'//图片网格化
 
 }

@@ -19,6 +19,10 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+
+/***
+评论适配器
+ */
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
     List<Comment> commentList;
     Context context;

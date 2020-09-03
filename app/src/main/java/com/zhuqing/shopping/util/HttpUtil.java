@@ -33,16 +33,18 @@ import okhttp3.Response;
 
 public class HttpUtil {
     public static String prefix="http://192.168.43.17:8080/";
-    public static String addressOfPicture = "http://192.168.43.17:8080/static/images/";
+    public  static String addressOfLogin=prefix+"login/";
+    public static String addressOfPicture = prefix+"static/images/";
 
-    public static String addressOfGetCommody = "http://192.168.43.17:8080/get_commody/";
+
+    public static String addressOfGetCommody = prefix+"get_commody/";
     public static String addressOfGetSortCommody=prefix+"sort_commody/";
     private static String addressOfSellCommody=prefix+"sell_commody/";
     public  static String addressOfGetComment=prefix+"get_comment/";
-    public static String addressOfSpecialCommody="http://192.168.43.17:8080/get_special_commody";
+    public static String addressOfSpecialCommody=prefix+"get_special_commody";
 
 
-    public static String addressOfPublicCommody="http://192.168.43.17:8080/public_commodity";
+    public static String addressOfPublicCommody=prefix+"public_commodity";
 
 
     public static void SendOkHttpRequest(String address, Request request, okhttp3.Callback callback) {
@@ -56,7 +58,7 @@ public class HttpUtil {
     public static class GetUtil {
 
 
-
+        private static String responseText;
 
         //获取用户自己的commody
         public static void GetCommody(List<Commodity>commodityList,int number, int state) throws IOException {
@@ -110,7 +112,16 @@ public class HttpUtil {
             OkHttpClient client = new OkHttpClient();
             Response response = client.newCall(request).execute();
 
-            String responseText = response.body().string();
+
+try{
+     responseText = response.body().string();
+
+}catch (Exception e)
+{
+    Log.d("test", "GetCommodyShow: -------------faile");
+//Toast.makeText(,"link faile",Toast.LENGTH_SHORT).show();
+}
+          //  String responseText = response.body().string();
 
             Gson gson = new Gson();
             List<Commodity> commodities = gson.fromJson(responseText, new TypeToken<List<Commodity>>() {

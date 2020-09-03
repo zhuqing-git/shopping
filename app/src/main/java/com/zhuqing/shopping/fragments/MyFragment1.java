@@ -135,12 +135,15 @@ public class MyFragment1 extends Fragment implements View.OnClickListener {
                 }
 
 
-                for (int i = 0; i < 3; i++) {
-                    //imageUrlData.add(Uri.parse(list.get(i).getImageList().get(0)));
+                    for (int i = 0; i < 3; i++) {
+                        //imageUrlData.add(Uri.parse(list.get(i).getImageList().get(0)));
 
-                    imageUrlData.add(Uri.parse(list.get(i).getImageList().get(0)));
-                    contentData.add(list.get(i).getContent());
-                }
+                        imageUrlData.add(Uri.parse(list.get(i).getImageList().get(0)));
+                        contentData.add(list.get(i).getContent());
+                    }
+
+
+
                 Message msg = new Message();
                 msg.what = 100;
                 handler.sendMessage(msg);
@@ -195,9 +198,9 @@ public class MyFragment1 extends Fragment implements View.OnClickListener {
 
                 try {
                     HttpUtil.GetUtil.GetCommodyShow(commodityList, Config.getCommodyNumber, state);
-                    ;
+
                 } catch (IOException e) {
-                    e.printStackTrace();
+                   // e.printStackTrace();
                 }
 
 

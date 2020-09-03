@@ -44,6 +44,9 @@ import java.util.ArrayList;
 import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/**
+ * 主页Activity
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 

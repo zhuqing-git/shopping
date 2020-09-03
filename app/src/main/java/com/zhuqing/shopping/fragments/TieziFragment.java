@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.zhuqing.shopping.R;
 import com.zhuqing.shopping.adapter.TieziAdapter;
 import com.zhuqing.shopping.entity.Tiezi;
+import com.zhuqing.shopping.util.ValueUtility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +31,9 @@ public class TieziFragment extends Fragment {
         recyclerView=(RecyclerView)view.findViewById(R.id.page2_recyclerView);
         LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+int[] imageArray={R.drawable.login};
 
-
-        tieziList.add(new Tiezi("用户名",R.drawable.d1,"title","content","topic",4,6,R.drawable.d222,0,0));
+        tieziList.add(new Tiezi(ValueUtility.getUserId(),"这里是标题","没有内容",imageArray,1));
 
         TieziAdapter adapter=new TieziAdapter(tieziList);
         recyclerView.setAdapter(adapter);
